@@ -6,7 +6,7 @@ use CodeIgniter\Model;
 
 class ProprietaireModel extends Model
 {
-    protected $table            = 'proprietaires';
+    protected $table            = 'proprietaire';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';

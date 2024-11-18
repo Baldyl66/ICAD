@@ -6,13 +6,13 @@ use CodeIgniter\Model;
 
 class AnimalModel extends Model
 {
-    protected $table            = 'animals';
+    protected $table            = 'animal';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = ['NOM', 'AGE','IDENTIFIANT','ICAD'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
