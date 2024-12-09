@@ -1,0 +1,241 @@
+/* Style global */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f7fc;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+/* Conteneur principal */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 40px;
+    background: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.container:hover {
+    transform: translateY(-5px);
+}
+
+/* Titre */
+h1 {
+    text-align: center;
+    color: #34495e;
+    font-size: 2.8rem;
+    margin-bottom: 40px;
+    font-weight: 700;
+}
+
+/* Bouton pour ajouter un animal */
+.add-animal {
+    padding: 12px 30px;
+    font-size: 18px;
+    color: #fff;
+    background-color: #3498db;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    margin: 30px auto;  /* Centrer le bouton avec un margin auto */
+    display: block;  /* Faire du bouton un élément de bloc pour qu'il puisse être centré */
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.add-animal:hover {
+    background-color: #2980b9;
+    transform: translateY(-3px);
+}
+
+
+
+/* Barre de recherche réduite */
+.search-bar {
+    padding: 10px 15px;
+    font-size: 16px;
+    width: 80%;  /* Réduction de la largeur */
+    margin-bottom: 30px;
+    border: 1px solid #ddd;
+    border-radius: 50px;
+    background-color: #f7f7f7;
+    transition: border-color 0.3s ease;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Focus sur la barre de recherche */
+.search-bar:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+
+/* Tableau */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Entête du tableau */
+thead th {
+    background-color: #3498db;
+    color: #fff;
+    padding: 15px;
+    text-align: left;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 16px;
+    border-bottom: 3px solid #2980b9;
+}
+
+/* Corps du tableau */
+tbody td {
+    padding: 15px;
+    border: 1px solid #ddd;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 14px;
+    color: #555;
+}
+
+/* Ligne paire */
+tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Ligne impaire */
+tbody tr:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+/* Style pour les animaux perdus */
+/* Style pour les animaux perdus */
+.lost {
+    background-color: #e74c3c;  /* Rouge plus intense */
+    color: #fff;  /* Texte en blanc */
+    font-weight: bold;  /* Met en gras le texte pour le rendre plus visible */
+    animation: blink 1s infinite alternate;  /* Animation clignotante pour attirer l'attention */
+}
+
+.lost td {
+    color: #fff;
+    font-weight: bold;
+}
+
+/* Badge indiquant que l'animal est perdu (superposé à la photo) */
+.lost .animal-photo {
+    border: 3px solid #e74c3c;  /* Bordure rouge autour de l'image */
+    box-shadow: 0 0 15px rgba(231, 76, 60, 0.6);  /* Ombre rouge pour accentuer l'effet */
+}
+
+.lost .animal-photo::after {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #e74c3c;
+    color: #fff;
+    padding: 5px 10px;
+    font-weight: bold;
+    font-size: 14px;
+    border-radius: 5px;
+    z-index: 10;  /* S'assurer que le badge soit visible au-dessus de l'image */
+    transform: translate(-50%, -50%);
+}
+
+/* Animation de clignotement pour rendre le statut "perdu" plus évident */
+@keyframes blink {
+    0% {
+        background-color: #e74c3c;
+    }
+    50% {
+        background-color: #c0392b;
+    }
+    100% {
+        background-color: #e74c3c;
+    }
+}
+
+
+/* Style pour les photos */
+.animal-photo {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #ddd;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.animal-photo:hover {
+    transform: scale(1.1);
+    border-color: #1abc9c;
+}
+
+/* Alignement et centrer du texte dans les cellules */
+td {
+    text-align: center;
+    padding: 15px;
+}
+
+/* Bordure de tableau */
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 15px;
+}
+
+/* Responsivité */
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+        padding: 20px;
+    }
+    
+    .add-animal {
+        font-size: 16px;
+        padding: 10px 20px;
+    }
+
+    .search-bar {
+        font-size: 14px;
+    }
+
+    table {
+        font-size: 14px;
+    }
+
+    .animal-photo {
+        width: 60px;
+        height: 60px;
+    }
+}
+
+.details-button {
+    display: inline-block; /* S'assure que le bouton soit bien un élément de type "bloc en ligne" */
+    padding: 10px 20px; /* Augmente les marges internes pour éviter un texte coupé */
+    background-color: #3498db; /* Couleur de fond */
+    color: white; /* Texte en blanc */
+    text-decoration: none; /* Supprime la décoration de lien */
+    border-radius: 5px; /* Coins arrondis */
+    font-weight: bold; /* Texte en gras */
+    font-size: 14px; /* Taille du texte */
+    text-align: center; /* Centre le texte à l'intérieur du bouton */
+    white-space: nowrap; /* Empêche le texte de passer à la ligne */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Ajoute une animation pour un effet hover fluide */
+}
+
+.details-button:hover {
+    background-color: #2980b9; /* Change la couleur au survol */
+    transform: scale(1.05); /* Effet de zoom léger */
+}

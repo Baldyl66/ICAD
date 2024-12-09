@@ -1,0 +1,133 @@
+/* Général */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Aligne le contenu en haut */
+    height: 100vh;
+    overflow-y: auto; /* Permet le défilement si nécessaire */
+}
+
+.container {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 900px;
+    margin: 20px;
+    padding: 20px;
+    box-sizing: border-box;
+    position: relative; /* Nécessaire pour positionner les boutons */
+    min-height: 80vh; /* S'assure que le conteneur prend une hauteur suffisante */
+    display: flex;
+    flex-direction: column; /* Structure verticale */
+    justify-content: flex-start; /* Place les éléments dans l'ordre */
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px; /* Ajoute de l'espace sous le titre */
+}
+
+/* Informations de l'animal */
+.animal-info {
+    font-size: 18px;
+    color: #555;
+    margin-top: 20px;
+}
+
+.animal-info p {
+    margin: 10px 0;
+}
+
+.animal-info strong {
+    color: #333;
+}
+
+.animal-info p:nth-child(odd) {
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.animal-info p:nth-child(even) {
+    padding: 10px;
+    border-radius: 4px;
+}
+
+/* Section pour les photos de l'animal */
+.animal-photo {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    text-align: center;
+}
+
+.animal-photo img {
+    max-width: 100%;
+    max-height: 300px; /* Limite la hauteur de l'image */
+    object-fit: cover; /* Redimensionne l'image tout en gardant son rapport */
+}
+
+/* Boutons */
+.button-container {
+    display: flex; /* Place les boutons côte à côte */
+    justify-content: center; /* Centre les boutons horizontalement */
+    align-items: center; /* Aligne les boutons verticalement */
+    gap: 20px; /* Espace entre les boutons */
+    margin-top: 20px; /* Espace au-dessus des boutons */
+    margin-bottom: 20px; /* Espace au-dessous des boutons */
+}
+
+.back-button, .delete-button {
+    padding: 12px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Bouton retour */
+.back-button {
+    background-color: #28a745; /* Vert */
+    color: white;
+    text-decoration: none;
+}
+
+.back-button:hover {
+    background-color: #0056b3;
+}
+
+/* Bouton supprimer */
+.delete-button {
+    background-color: red; /* Rouge */
+    color: white;
+    border: none;
+}
+
+.delete-button:hover {
+    background-color: #c82333; /* Rouge foncé */
+}
+
+.edit-button {
+    padding: 12px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+}
+
+.edit-button:hover {
+    background-color: #218838; /* Vert foncé */
+}
