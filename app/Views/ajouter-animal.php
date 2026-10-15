@@ -17,7 +17,7 @@
     <div class="form-card">
         <div class="form-title-area">
             <h1 class="form-title">Ajouter un animal</h1>
-            <p class="form-subtitle">Enregistrement d'un nouveau carnivore domestique dans le fichier national.</p>
+            <p class="form-subtitle">Enregistrement d'une nouvelle fiche d'identification animale.</p>
         </div>
 
         <?php if (session()->getFlashdata('errors')): ?>

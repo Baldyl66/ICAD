@@ -1,10 +1,10 @@
-/* Fiche profil de l'animal - Format Passeport */
+/* Fiche detaillee de l'animal */
 .details-page {
-    max-width: 860px;
+    max-width: 800px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 14px;
 }
 
 .details-nav-bar {
@@ -16,214 +16,204 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    font-size: 0.9rem;
+    font-size: 0.88rem;
     font-weight: 600;
     color: var(--text-muted);
     text-decoration: none;
-    transition: color var(--transition-fast);
+    transition: color var(--transition);
 }
 
 .back-link:hover {
     color: var(--primary);
 }
 
-.card-passport {
+.profile-card {
     background: var(--bg-card);
     border: 1px solid var(--border-color);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-lg);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
     overflow: hidden;
 }
 
-.passport-header {
+.profile-top {
     display: flex;
-    gap: 32px;
-    padding: 32px;
-    background: linear-gradient(to bottom, #f8fafc, #ffffff);
+    gap: 24px;
+    padding: 24px;
     border-bottom: 1px solid var(--border-color);
     align-items: center;
 }
 
-.passport-photo-side {
+.profile-photo-col {
     flex-shrink: 0;
 }
 
-.photo-frame {
-    width: 170px;
-    height: 170px;
+.photo-box {
+    width: 140px;
+    height: 140px;
     border-radius: var(--radius-md);
     overflow: hidden;
-    background-color: #e2e8f0;
-    box-shadow: var(--shadow-md);
-    border: 3px solid #ffffff;
+    background-color: #f1f5f9;
+    border: 1px solid var(--border-color);
 }
 
-.animal-cover-img {
+.profile-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
 }
 
-.photo-empty-state {
+.photo-fallback {
     width: 100%;
     height: 100%;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    color: #94a3b8;
-    text-align: center;
-    font-size: 0.75rem;
-    padding: 12px;
+    background-color: #e2e8f0;
+    color: #64748b;
+    font-size: 2rem;
+    font-weight: 700;
 }
 
-.passport-title-side {
+.profile-header-col {
     flex: 1;
-}
-
-.passport-top-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 8px;
-}
-
-.passport-category {
-    font-size: 0.82rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--text-muted);
-    font-weight: 600;
-}
-
-.passport-name {
-    font-size: 2.2rem;
-    font-weight: 800;
-    color: var(--text-main);
-    margin: 0 0 6px 0;
-    letter-spacing: -0.02em;
-}
-
-.passport-icad {
-    margin: 0;
-    color: var(--text-muted);
-    font-size: 0.95rem;
-}
-
-.passport-icad strong {
-    color: var(--primary);
-    font-family: ui-monospace, monospace;
-}
-
-.passport-body {
-    padding: 32px;
-}
-
-.info-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-}
-
-.info-card {
-    background: #f8fafc;
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-sm);
-    padding: 16px;
     display: flex;
     flex-direction: column;
     gap: 4px;
 }
 
-.info-card.full-span {
-    grid-column: 1 / -1;
+.profile-status-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
-.info-label {
-    font-size: 0.78rem;
-    font-weight: 600;
+.profile-id {
+    font-size: 0.82rem;
     color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
 }
 
-.info-value {
-    font-size: 1.1rem;
-    font-weight: 700;
+.profile-id strong {
+    font-family: monospace;
     color: var(--text-main);
 }
 
-.info-desc {
-    margin: 8px 0 0 0;
-    font-size: 0.95rem;
-    color: #334155;
-    line-height: 1.6;
+.profile-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin: 4px 0 0 0;
+    letter-spacing: -0.01em;
 }
 
-.passport-actions {
+.profile-subtitle {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.profile-body {
+    padding: 24px;
+}
+
+.section-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin: 0 0 16px 0;
+}
+
+.specs-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+}
+
+.spec-item {
+    background-color: #f8fafc;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 12px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.spec-item.full-width {
+    grid-column: 1 / -1;
+}
+
+.spec-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.spec-value {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+.spec-value.font-mono {
+    font-family: monospace;
+}
+
+.spec-desc {
+    margin: 6px 0 0 0;
+    font-size: 0.9rem;
+    color: #334155;
+    line-height: 1.5;
+}
+
+.profile-actions {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 24px 32px;
-    background: #f8fafc;
+    padding: 16px 24px;
+    background-color: #f8fafc;
     border-top: 1px solid var(--border-color);
-    gap: 16px;
+    gap: 12px;
     flex-wrap: wrap;
 }
 
 .actions-left {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 8px;
 }
 
 .actions-right form {
     margin: 0;
 }
 
-/* Variante si perdu */
-.passport-lost {
-    border-color: rgba(239, 68, 68, 0.4);
+.profile-lost {
+    border-color: rgba(220, 38, 38, 0.3);
 }
 
-.passport-lost .passport-header {
-    background: linear-gradient(to bottom, #fff1f2, #ffffff);
-}
-
-.passport-lost .photo-frame {
-    border-color: #fee2e2;
-    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.3);
-}
-
-@media (max-width: 768px) {
-    .passport-header {
+@media (max-width: 640px) {
+    .profile-top {
         flex-direction: column;
         text-align: center;
-        gap: 20px;
+        gap: 16px;
     }
 
-    .passport-top-row {
-        flex-direction: column;
-        gap: 8px;
+    .profile-status-row {
+        justify-content: center;
     }
 
-    .info-grid {
+    .specs-grid {
         grid-template-columns: 1fr;
     }
 
-    .passport-actions {
+    .profile-actions {
         flex-direction: column;
-        align-items: stretch;
     }
 
     .actions-left, .actions-right, .actions-right form, .actions-right button {
         width: 100%;
-    }
-
-    .actions-left {
-        flex-direction: column;
     }
 
     .actions-left .btn {
