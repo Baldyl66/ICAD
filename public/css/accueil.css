@@ -392,12 +392,22 @@
 
 .card-gender-pill {
     font-size: 0.72rem;
-    font-weight: 500;
-    color: var(--text-secondary);
-    background-color: #f8fafc;
-    border: 1px solid var(--border);
+    font-weight: 600;
     padding: 2px 8px;
     border-radius: var(--radius-sm);
+    letter-spacing: 0.01em;
+}
+
+.gender-male {
+    background-color: #eff6ff;
+    color: #1d4ed8;
+    border: 1px solid #bfdbfe;
+}
+
+.gender-female {
+    background-color: #fdf2f8;
+    color: #be185d;
+    border: 1px solid #fbcfe8;
 }
 
 .card-desc-txt {
@@ -413,39 +423,51 @@
 
 .card-footer-box {
     display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
+    align-items: center;
     margin-top: auto;
     padding-top: 10px;
     border-top: 1px solid var(--border-subtle);
 }
 
-.owner-meta-block {
+.owner-inline-row {
     display: flex;
-    flex-direction: column;
-    text-align: left;
-    gap: 2px;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.78rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
 }
 
 .owner-tiny-lbl {
-    font-size: 0.64rem;
+    font-size: 0.66rem;
     font-weight: 700;
     text-transform: uppercase;
     color: var(--text-tertiary);
-    letter-spacing: 0.05em;
+    letter-spacing: 0.04em;
+    flex-shrink: 0;
 }
 
 .owner-main-name {
-    font-size: 0.82rem;
+    font-size: 0.8rem;
     font-weight: 700;
     color: var(--text-primary);
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.owner-dot-sep {
+    color: var(--text-tertiary);
+    font-size: 0.7rem;
+    flex-shrink: 0;
 }
 
 .owner-tel-link {
-    font-size: 0.72rem;
+    font-size: 0.75rem;
     color: var(--text-secondary);
     font-family: var(--font-mono);
-    text-align: left;
+    flex-shrink: 0;
 }
 
 /* Etat aucun resultat */

@@ -118,6 +118,9 @@ foreach ($animauxList as $item) {
                 $prop = trim(($animal['prenom_proprietaire'] ?? '') . ' ' .
                              ($animal['nom_proprietaire'] ?? ''));
                 $initiale = strtoupper(substr(esc($animal['PRENOM'] ?? 'A'), 0, 1));
+                $sexeRaw = mb_strtolower(trim($animal['SEXE'] ?? ''));
+                $isFemale = (strpos($sexeRaw, 'fem') !== false || $sexeRaw === 'f');
+                $genderClass = $isFemale ? 'gender-female' : 'gender-male';
                 ?>
                 <a href="<?= base_url('animal/' . $animal['ICAD']); ?>"
                    class="animal-card <?= $isPerdu ? 'card-lost' : '' ?>"
@@ -171,7 +174,7 @@ foreach ($animauxList as $item) {
                                     <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
                                 </svg>
                             </span>
-                            <span class="card-gender-pill"><?= esc($animal['SEXE']) ?></span>
+                            <span class="card-gender-pill <?= $genderClass ?>"><?= esc($animal['SEXE']) ?></span>
                         </div>
 
                         <?php if (!empty($animal['DESCRIPTIF'])): ?>
@@ -181,10 +184,11 @@ foreach ($animauxList as $item) {
                         <?php endif; ?>
 
                         <div class="card-footer-box">
-                            <div class="owner-meta-block">
-                                <span class="owner-tiny-lbl">Titulaire</span>
+                            <div class="owner-inline-row">
+                                <span class="owner-tiny-lbl">Titulaire :</span>
                                 <span class="owner-main-name"><?= esc($prop ?: 'Non renseigne') ?></span>
                                 <?php if (!empty($animal['TELEPHONE'])): ?>
+                                    <span class="owner-dot-sep">&bull;</span>
                                     <span class="owner-tel-link"><?= esc($animal['TELEPHONE']) ?></span>
                                 <?php endif; ?>
                             </div>
