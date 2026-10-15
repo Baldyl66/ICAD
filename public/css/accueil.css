@@ -340,6 +340,13 @@
     gap: 8px;
 }
 
+.card-pills-group {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+}
+
 .card-animal-name {
     font-size: 1.1rem;
     font-weight: 800;
@@ -424,6 +431,7 @@
 .card-footer-box {
     display: flex;
     align-items: center;
+    justify-content: center;
     margin-top: auto;
     padding-top: 10px;
     border-top: 1px solid var(--border-subtle);
@@ -432,6 +440,8 @@
 .owner-inline-row {
     display: flex;
     align-items: center;
+    justify-content: center;
+    text-align: center;
     gap: 6px;
     font-size: 0.78rem;
     white-space: nowrap;

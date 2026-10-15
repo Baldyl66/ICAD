@@ -102,7 +102,7 @@ foreach ($animauxList as $item) {
         <span id="counterLabel" class="counter-text">
             Affichage de <strong><?= $totalAnimaux ?></strong> animal(aux)
         </span>
-        <span id="toastCopy" class="toast-copy">Identifiant copie dans le presse-papier</span>
+        
     </div>
 
     <!-- Grille de blocs d'animaux -->
@@ -158,23 +158,10 @@ foreach ($animauxList as $item) {
                     <div class="card-content">
                         <div class="card-header-row">
                             <h3 class="card-animal-name"><?= esc($animal['PRENOM']) ?></h3>
-                            <span class="card-age-pill"><?= esc($animal['AGE']) ?> ans</span>
-                        </div>
-
-                        <div class="card-badges-row">
-                            <span class="icad-badge-btn"
-                                  role="button"
-                                  tabindex="0"
-                                  data-copy="<?= esc($animal['ICAD']) ?>"
-                                  title="Cliquer pour copier l'identifiant">
-                                <span class="mono-id">#<?= esc($animal['ICAD']) ?></span>
-                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none"
-                                     stroke="currentColor" stroke-width="2">
-                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                                </svg>
-                            </span>
-                            <span class="card-gender-pill <?= $genderClass ?>"><?= esc($animal['SEXE']) ?></span>
+                            <div class="card-pills-group">
+                                <span class="card-gender-pill <?= $genderClass ?>"><?= esc($animal['SEXE']) ?></span>
+                                <span class="card-age-pill"><?= esc($animal['AGE']) ?> ans</span>
+                            </div>
                         </div>
 
                         <?php if (!empty($animal['DESCRIPTIF'])): ?>
@@ -217,8 +204,7 @@ foreach ($animauxList as $item) {
         const search = document.getElementById('quickSearch');
         const kpiFilters = document.querySelectorAll('.kpi-card-btn');
         const counter = document.getElementById('counterLabel');
-        const toast = document.getElementById('toastCopy');
-        const noResults = document.getElementById('noResultsBlock');
+                const noResults = document.getElementById('noResultsBlock');
 
         let activeFilter = 'all';
 
@@ -263,18 +249,6 @@ foreach ($animauxList as $item) {
             });
         });
 
-        document.querySelectorAll('.icad-badge-btn').forEach(function(btn) {
-            btn.addEventListener('click', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                const num = this.getAttribute('data-copy');
-                if (!navigator.clipboard) return;
-                navigator.clipboard.writeText(num).then(function() {
-                    toast.classList.add('visible');
-                    setTimeout(function() { toast.classList.remove('visible'); }, 2000);
-                });
-            });
-        });
     })();
 </script>
 
