@@ -1,102 +1,63 @@
-/* Vue Registre - Nouveau Design */
+/* Registre Animalier - Affichage Blocs Studio Compact */
 .view-root {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    width: 100%;
 }
 
-.view-header {
+/* En-tete principal centre */
+.registry-header {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    flex-wrap: wrap;
-    gap: 16px;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    text-align: center;
+    padding: 6px 0 2px 0;
 }
 
-.view-heading {
-    font-size: 1.65rem;
-    font-weight: 700;
+.header-titles-centered {
+    text-align: center;
+}
+
+.header-heading {
+    font-size: 1.6rem;
+    font-weight: 800;
     color: var(--text-primary);
-    letter-spacing: -0.02em;
+    letter-spacing: -0.025em;
     line-height: 1.2;
 }
 
-.view-lead {
-    font-size: 0.88rem;
+.header-lead {
+    font-size: 0.86rem;
     color: var(--text-secondary);
     margin-top: 4px;
 }
 
-.view-actions {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+.header-action-right {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
-/* Ruban de resume rapide */
-.summary-ribbon {
-    display: inline-flex;
+/* Barre de controle unifiee (Recherche + Cartes KPI sur la meme ligne) */
+.unified-control-bar {
+    display: flex;
     align-items: center;
-    background-color: var(--bg-surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-md);
-    padding: 8px 16px;
-    align-self: flex-start;
-    box-shadow: var(--shadow-card);
+    justify-content: center;
     gap: 16px;
-}
-
-.ribbon-item {
-    display: flex;
-    align-items: baseline;
-    gap: 6px;
-}
-
-.ribbon-num {
-    font-size: 1.15rem;
-    font-weight: 700;
-    color: var(--text-primary);
-}
-
-.ribbon-num.num-green {
-    color: var(--success);
-}
-
-.ribbon-num.num-red {
-    color: var(--danger);
-}
-
-.ribbon-text {
-    font-size: 0.78rem;
-    color: var(--text-secondary);
-    text-transform: lowercase;
-}
-
-.ribbon-sep {
-    width: 1px;
-    height: 16px;
-    background-color: var(--border);
-}
-
-/* Barre d'outils unifiee */
-.toolbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     flex-wrap: wrap;
-    gap: 12px;
+}
+
+.search-box {
+    position: relative;
+    flex: 0 1 420px;
+    min-width: 260px;
     background: var(--bg-surface);
     border: 1px solid var(--border);
     border-radius: var(--radius-md);
-    padding: 10px 14px;
-    box-shadow: var(--shadow-card);
-}
-
-.search-input-group {
-    position: relative;
-    flex: 1;
-    min-width: 260px;
-    max-width: 440px;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03);
 }
 
 .search-ico {
@@ -108,95 +69,132 @@
     pointer-events: none;
 }
 
-.search-field {
+.search-input {
     width: 100%;
-    padding: 8px 12px 8px 36px;
-    font-size: 0.86rem;
+    padding: 9px 12px 9px 36px;
+    font-size: 0.84rem;
     font-family: inherit;
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    background-color: #f8fafc;
+    border: none;
+    border-radius: var(--radius-md);
+    background-color: transparent;
     color: var(--text-primary);
     transition: all 0.15s ease;
 }
 
-.search-field:focus {
+.search-input:focus {
     outline: none;
-    border-color: var(--primary);
-    background-color: #ffffff;
     box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
 }
 
-.toolbar-controls {
+/* Cartes KPI Cliquables Filtres */
+.kpi-filters-row {
     display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.kpi-card-btn {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 8px 14px;
+    display: inline-flex;
     align-items: center;
     gap: 12px;
-}
-
-.pill-group {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    background-color: #f1f5f9;
-    padding: 3px;
-    border-radius: var(--radius-sm);
-}
-
-.filter-tab {
-    border: none;
-    background: transparent;
-    color: var(--text-secondary);
-    padding: 5px 12px;
-    font-size: 0.78rem;
-    font-weight: 600;
-    border-radius: var(--radius-sm);
+    min-width: 130px;
+    justify-content: center;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
     cursor: pointer;
     font-family: inherit;
     transition: all 0.15s ease;
 }
 
-.filter-tab:hover {
-    color: var(--text-primary);
+.kpi-card-btn:hover {
+    transform: translateY(-1px);
+    border-color: #cbd5e1;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
 }
 
-.filter-tab.active {
-    background: #ffffff;
-    color: var(--text-primary);
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+.kpi-card-btn.active[data-filter="all"] {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.18);
 }
 
-.display-toggle {
-    display: flex;
-    align-items: center;
-    border: 1px solid var(--border);
+.kpi-card-btn.active[data-filter="retrouve"] {
+    border-color: var(--success);
+    box-shadow: 0 0 0 2px rgba(5, 150, 105, 0.18);
+}
+
+.kpi-card-btn.active[data-filter="perdu"] {
+    border-color: var(--danger);
+    box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.18);
+}
+
+.kpi-icon {
+    width: 36px;
+    height: 36px;
     border-radius: var(--radius-sm);
-    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
 }
 
-.toggle-btn {
-    border: none;
-    background: #ffffff;
-    padding: 6px 10px;
-    cursor: pointer;
+.icon-blue {
+    background-color: var(--primary-subtle);
+    color: var(--primary);
+}
+
+.icon-emerald {
+    background-color: var(--success-bg);
+    color: var(--success);
+}
+
+.icon-rose {
+    background-color: var(--danger-bg);
+    color: var(--danger);
+}
+
+.kpi-info {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+}
+
+.kpi-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
     color: var(--text-secondary);
-    display: flex;
-    align-items: center;
-    transition: all 0.15s ease;
+    text-align: center;
 }
 
-.toggle-btn:hover {
-    background: #f8fafc;
-}
-
-.toggle-btn.active {
-    background: #e2e8f0;
+.kpi-value {
+    font-size: 1.22rem;
+    font-weight: 800;
     color: var(--text-primary);
+    line-height: 1.1;
+    margin-top: 1px;
+    text-align: center;
 }
 
-.meta-status {
+.text-emerald {
+    color: var(--success);
+}
+
+.text-rose {
+    color: var(--danger);
+}
+
+/* Statut des resultats */
+.results-bar {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     font-size: 0.8rem;
     color: var(--text-secondary);
     padding: 0 2px;
@@ -205,332 +203,317 @@
 .toast-copy {
     color: var(--success);
     font-weight: 600;
+    font-size: 0.78rem;
     opacity: 0;
-    transition: opacity 0.2s ease;
+    transform: translateY(4px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
-/* Table Surface (Clean Board) */
-.data-surface {
+.toast-copy.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Grille de cartes / Blocs */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+    width: 100%;
+}
+
+.animal-card {
     background: var(--bg-surface);
     border: 1px solid var(--border);
     border-radius: var(--radius-md);
-    box-shadow: var(--shadow-card);
     overflow: hidden;
-}
-
-.app-table {
-    width: 100%;
-    border-collapse: collapse;
-    text-align: left;
-    font-size: 0.86rem;
-}
-
-.app-table thead {
-    background-color: #f8fafc;
-    border-bottom: 1px solid var(--border);
-}
-
-.app-table thead th {
-    padding: 12px 18px;
-    font-size: 0.74rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    color: var(--text-secondary);
-    white-space: nowrap;
-}
-
-.app-table tbody tr {
-    border-bottom: 1px solid var(--border-subtle);
-    transition: background-color 0.12s ease;
-}
-
-.app-table tbody tr:last-child {
-    border-bottom: none;
-}
-
-.app-table tbody tr:hover {
-    background-color: #f8fafc;
-}
-
-.app-table td {
-    padding: 12px 18px;
-    vertical-align: middle;
-}
-
-.cell-entity {
     display: flex;
-    align-items: center;
-    gap: 12px;
+    flex-direction: column;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-.entity-thumb {
-    width: 42px;
-    height: 42px;
-    border-radius: var(--radius-sm);
+.animal-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+}
+
+/* Media de carte */
+.card-media {
+    position: relative;
+    width: 100%;
+    height: 180px;
+    background-color: #f8fafc;
     overflow: hidden;
-    background-color: #e2e8f0;
-    flex-shrink: 0;
-    border: 1px solid var(--border);
 }
 
-.thumb-img {
+.card-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
 }
 
-.thumb-fallback {
+.card-placeholder-bg {
     width: 100%;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #e2e8f0;
-    color: #475569;
-    font-weight: 700;
-    font-size: 0.95rem;
+    background: linear-gradient(135deg, #f8fafc 0%, #edf2f7 100%);
 }
 
-.entity-meta {
+.avatar-monogram {
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    color: var(--text-secondary);
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.35rem;
+    font-weight: 800;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+    border: 1px solid rgba(226, 232, 240, 0.8);
 }
 
-.entity-name {
-    font-weight: 600;
-    color: var(--text-primary);
-    font-size: 0.9rem;
-}
-
-.entity-sub {
-    font-size: 0.76rem;
-    color: var(--text-tertiary);
-}
-
-.badge-chip {
+/* Badges Statuts avec la MEME DA : Fond blanc pur + Pastille coloree */
+.badge-status-pill {
+    position: absolute;
+    top: 12px;
+    right: 12px;
     display: inline-flex;
     align-items: center;
-    background: #f1f5f9;
+    gap: 6px;
+    padding: 4px 11px;
+    font-size: 0.74rem;
+    font-weight: 700;
+    border-radius: var(--radius-pill);
+    background-color: #ffffff;
+    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.08);
+    letter-spacing: 0.02em;
+}
+
+.badge-lost {
+    color: #dc2626;
+    border: 1px solid rgba(220, 38, 38, 0.28);
+}
+
+.badge-found {
+    color: #047857;
+    border: 1px solid rgba(5, 150, 105, 0.25);
+}
+
+.badge-dot-rose {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #dc2626;
+}
+
+.badge-dot-emerald {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #10b981;
+}
+
+/* Corps de carte */
+.card-content {
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    flex: 0 1 420px;
+    gap: 10px;
+}
+
+.card-header-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-animal-name {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.015em;
+    line-height: 1.2;
+}
+
+.card-age-pill {
+    font-size: 0.76rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    background-color: #f1f5f9;
+    padding: 2px 8px;
+    border-radius: var(--radius-pill);
+}
+
+.card-badges-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.icad-badge-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background-color: #f8fafc;
     border: 1px solid var(--border);
     border-radius: var(--radius-sm);
     padding: 3px 8px;
     cursor: pointer;
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
     color: var(--text-secondary);
     transition: all 0.12s ease;
 }
 
-.badge-chip:hover {
-    background: #e2e8f0;
-    color: var(--text-primary);
+.icad-badge-btn:hover {
+    background-color: #ffffff;
+    border-color: var(--primary);
+    color: var(--primary);
 }
 
-.badge-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background-color: currentColor;
-    display: inline-block;
+.mono-id {
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    font-weight: 700;
 }
 
-.prop-cell {
+.card-gender-pill {
+    font-size: 0.74rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    background-color: #f8fafc;
+    border: 1px solid var(--border);
+    padding: 2px 8px;
+    border-radius: var(--radius-sm);
+}
+
+.card-desc-txt {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    line-height: 1.45;
+    margin-top: 2px;
+}
+
+.card-footer-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: auto;
+    padding-top: 14px;
+    border-top: 1px solid var(--border-subtle);
+}
+
+.owner-meta-block {
     display: flex;
     flex-direction: column;
 }
 
-.prop-title {
-    font-weight: 500;
+.owner-tiny-lbl {
+    font-size: 0.66rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    letter-spacing: 0.05em;
+}
+
+.owner-main-name {
+    font-size: 0.84rem;
+    font-weight: 700;
     color: var(--text-primary);
 }
 
-.prop-sub {
-    font-size: 0.76rem;
+.owner-tel-link {
+    font-size: 0.72rem;
     color: var(--text-tertiary);
+    font-family: var(--font-mono);
+    margin-top: 1px;
+    text-align: center;
 }
 
-.th-actions {
-    text-align: right;
-}
-
-.row-link {
-    display: inline-block;
-    padding: 5px 12px;
-    font-size: 0.78rem;
+.btn-consult-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 14px;
+    font-size: 0.8rem;
     font-weight: 600;
     color: var(--primary);
     background-color: var(--primary-subtle);
     border-radius: var(--radius-sm);
     text-decoration: none;
-    transition: all 0.12s ease;
+    transition: all 0.15s ease;
 }
 
-.row-link:hover {
+.btn-consult-action:hover {
     background-color: var(--primary);
     color: #ffffff;
 }
 
-.is-lost {
-    background-color: #fff8f8 !important;
-}
-
-.is-lost:hover {
-    background-color: #fff1f2 !important;
-}
-
-.is-lost .entity-name {
-    color: var(--danger);
-}
-
-.cell-empty {
-    text-align: center;
-    padding: 40px;
-    color: var(--text-secondary);
-}
-
-/* Grille de cartes */
-.cards-deck {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
-    gap: 16px;
-}
-
-.deck-card {
-    background: var(--bg-surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-md);
-    overflow: hidden;
+/* Etat aucun resultat */
+.empty-results-box {
+    grid-column: 1 / -1;
     display: flex;
     flex-direction: column;
-    box-shadow: var(--shadow-card);
-    transition: transform 0.15s ease;
-}
-
-.deck-card:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-dropdown);
-}
-
-.deck-media {
-    position: relative;
-    width: 100%;
-    height: 190px;
-    background-color: #f1f5f9;
-}
-
-.deck-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.deck-empty-photo {
-    width: 100%;
-    height: 100%;
-    display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #e2e8f0;
-    color: #64748b;
-    font-size: 2.4rem;
-    font-weight: 700;
-}
-
-.deck-status-badge {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-}
-
-.deck-body {
-    padding: 16px;
-    display: flex;
-    flex-direction: column;
-    flex: 1;
     gap: 8px;
+    padding: 56px 20px;
+    text-align: center;
+    color: var(--text-tertiary);
+    background-color: var(--bg-surface);
+    border: 1px dashed var(--border);
+    border-radius: var(--radius-md);
 }
 
-.deck-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.deck-title {
-    font-size: 1.15rem;
+.empty-title {
+    font-size: 1.05rem;
     font-weight: 700;
     color: var(--text-primary);
 }
 
-.deck-age {
-    font-size: 0.8rem;
+.empty-sub {
+    font-size: 0.84rem;
     color: var(--text-secondary);
+    text-align: center;
 }
 
-.deck-specs {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.78rem;
-    color: var(--text-secondary);
-}
-
-.spec-chip {
-    font-family: var(--font-mono);
-    background-color: #f1f5f9;
-    padding: 2px 6px;
-    border-radius: var(--radius-sm);
-}
-
-.deck-desc {
-    font-size: 0.82rem;
-    color: var(--text-secondary);
-    line-height: 1.4;
-    margin-top: 4px;
-}
-
-.deck-bottom {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: auto;
-    padding-top: 12px;
-    border-top: 1px solid var(--border-subtle);
-}
-
-.deck-owner {
-    font-size: 0.78rem;
-    color: var(--text-secondary);
-    font-weight: 500;
-}
-
-@media (max-width: 768px) {
-    .view-header {
+@media (max-width: 860px) {
+    .unified-control-bar {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: stretch;
     }
 
-    .view-actions {
+    .kpi-filters-row {
+        justify-content: center;
+    }
+
+    .kpi-card-btn {
+        flex: 0 1 420px;
+        justify-content: center;
+    }
+
+    .registry-header {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .header-action-right {
+        position: static;
+        transform: none;
         width: 100%;
     }
 
-    .view-actions .btn {
-        flex: 1;
+    .header-action-right .btn {
+        width: 100%;
     }
 
-    .toolbar {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .toolbar-controls {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .pill-group {
-        justify-content: center;
+    .cards-grid {
+        grid-template-columns: 1fr;
     }
 }

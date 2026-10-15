@@ -3,26 +3,16 @@
 <?= $this->section('contenu') ?>
 <link rel="stylesheet" href="<?= base_url('css/ajouter-animal.css?v=' . time()); ?>">
 
-<div class="form-layout">
-    <div class="form-nav">
-        <a href="<?= base_url('/') ?>" class="back-link">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <line x1="19" y1="12" x2="5" y2="12"></line>
-                <polyline points="12 19 5 12 12 5"></polyline>
-            </svg>
-            Retour au registre
-        </a>
-    </div>
-
-    <div class="form-panel">
-        <div class="panel-header">
-            <h1 class="panel-title">Enregistrer un animal</h1>
-            <p class="panel-desc">Saisie des donnees d'identification et rattachement au proprietaire.</p>
+<div class="form-wrapper">
+    <div class="form-card">
+        <div class="card-head">
+            <h1 class="card-title">Enregistrer un animal</h1>
+            <p class="card-subtitle">Renseignez l'identite du carnivore domestique et son titulaire.</p>
         </div>
 
         <?php if (session()->getFlashdata('errors')): ?>
             <div class="alert-box">
-                <span class="alert-title">Erreurs de validation :</span>
+                <span class="alert-title">Erreurs de saisie :</span>
                 <ul>
                     <?php foreach (session()->getFlashdata('errors') as $error): ?>
                         <li><?= esc($error) ?></li>
@@ -31,84 +21,126 @@
             </div>
         <?php endif ?>
 
-        <form action="<?= site_url('/ajouter-animal'); ?>" method="POST" enctype="multipart/form-data" class="app-form">
+        <form action="<?= site_url('/ajouter-animal'); ?>"
+              method="POST"
+              enctype="multipart/form-data"
+              class="app-form">
             <?= csrf_field() ?>
 
-            <div class="form-sections">
-                <div class="upload-area">
-                    <label class="input-label" for="photo">Photographie</label>
-                    <div class="drop-zone">
-                        <input type="file" id="photo" name="photo" accept="image/*" class="file-native" onchange="onPhotoSelected(event)">
-                        <div class="drop-placeholder" id="dropPlaceholder">
-                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <!-- Identite et Photo en tete de formulaire -->
+            <div class="identity-section">
+                <!-- Zone Avatar Photo -->
+                <div class="avatar-block">
+                    <label class="label-text">Photographie</label>
+                    <div class="avatar-box" id="avatarBox">
+                        <input type="file" id="photo" name="photo" accept="image/*"
+                               class="avatar-native-input" onchange="previewSelectedPhoto(event)">
+                        <div class="avatar-empty" id="avatarEmpty">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                 stroke="currentColor" stroke-width="1.8">
                                 <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
                                 <circle cx="8.5" cy="8.5" r="1.5"></circle>
                                 <polyline points="21 15 16 10 5 21"></polyline>
                             </svg>
-                            <span>Selectionner une image JPG, PNG ou WEBP</span>
+                            <span>Ajouter</span>
                         </div>
-                        <div class="drop-preview" id="dropPreview" style="display: none;">
-                            <img id="previewImage" src="" alt="" class="preview-img">
-                        </div>
+                        <img id="imagePreviewTarget" src="" alt="Apercu" class="avatar-img" style="display: none;">
                     </div>
                 </div>
 
-                <div class="fields-grid">
-                    <div class="field-item">
-                        <label class="input-label" for="prenom_animal">Nom / Prenom</label>
-                        <input type="text" id="prenom_animal" name="prenom_animal" class="text-input" placeholder="Ex: Rio" required>
+                <!-- Champs d'identite immediats -->
+                <div class="identity-inputs">
+                    <div class="form-row-2">
+                        <div class="field-box">
+                            <label class="label-text" for="prenom_animal">Nom de l'animal</label>
+                            <input type="text" id="prenom_animal" name="prenom_animal"
+                                   class="ctrl-input" placeholder="Ex: Rio" required autofocus>
+                        </div>
+                        <div class="field-box">
+                            <label class="label-text" for="age">Age (annees)</label>
+                            <input type="number" id="age" name="age" min="0" max="35"
+                                   class="ctrl-input" placeholder="Ex: 3" required>
+                        </div>
                     </div>
 
-                    <div class="field-item">
-                        <label class="input-label" for="age">Age (annees)</label>
-                        <input type="number" id="age" name="age" min="0" max="40" class="text-input" placeholder="Ex: 4" required>
-                    </div>
-
-                    <div class="field-item">
-                        <label class="input-label" for="sexe">Sexe</label>
-                        <select id="sexe" name="sexe" class="select-input" required>
-                            <option value="Mâle">Male</option>
-                            <option value="Femelle">Femelle</option>
-                        </select>
-                    </div>
-
-                    <div class="field-item">
-                        <label class="input-label" for="Statue">Statut</label>
-                        <select id="Statue" name="Statue" class="select-input" required>
-                            <option value="retrouvé">Retrouve / Securise</option>
-                            <option value="perdu">Perdu</option>
-                        </select>
-                    </div>
-
-                    <div class="field-item full-col">
-                        <label class="input-label" for="identifiant">Identifiant proprietaire</label>
-                        <input type="text" id="identifiant" name="identifiant" class="text-input mono" placeholder="Code titulaire (ex: 1, 2...)" required>
-                    </div>
-
-                    <div class="field-item full-col">
-                        <label class="input-label" for="descriptif">Descriptif & particularites</label>
-                        <textarea id="descriptif" name="descriptif" rows="3" class="text-input textarea" placeholder="Robe, couleur des yeux, tatouage, signes..."></textarea>
+                    <div class="form-row-2">
+                        <div class="field-box">
+                            <label class="label-text" for="sexe">Sexe</label>
+                            <select id="sexe" name="sexe" class="ctrl-select" required>
+                                <option value="Male">Male</option>
+                                <option value="Femelle">Femelle</option>
+                            </select>
+                        </div>
+                        <div class="field-box">
+                            <label class="label-text" for="Statue">Statut</label>
+                            <select id="Statue" name="Statue" class="ctrl-select" required>
+                                <option value="retrouve">Retrouve / Au foyer</option>
+                                <option value="perdu">Signale Perdu</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="panel-footer">
-                <button type="submit" class="btn btn-primary">Enregistrer la fiche</button>
+            <!-- Proprietaire responsable -->
+            <div class="field-box">
+                <div class="label-row">
+                    <label class="label-text" for="identifiant">Proprietaire responsable</label>
+                    <a href="<?= base_url('ajouter-proprietaire') ?>" class="quick-add-link">
+                        + Creer un nouveau proprietaire
+                    </a>
+                </div>
+                <?php if (!empty($proprietaires)): ?>
+                    <select id="identifiant" name="identifiant" class="ctrl-select" required>
+                        <option value="" disabled selected>Selectionner le proprietaire dans la liste...</option>
+                        <?php foreach ($proprietaires as $p): ?>
+                            <option value="<?= esc($p['IDENTIFIANT']) ?>">
+                                #<?= esc($p['IDENTIFIANT']) ?> - <?= esc($p['NOM']) ?> <?= esc($p['PRENOM']) ?>
+                                (<?= esc($p['TELEPHONE']) ?>)
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                <?php else: ?>
+                    <input type="number" id="identifiant" name="identifiant"
+                           class="ctrl-input mono" placeholder="Identifiant proprietaire (ex: 1)" required>
+                <?php endif; ?>
+            </div>
+
+            <!-- Descriptif -->
+            <div class="field-box">
+                <label class="label-text" for="descriptif">
+                    Signes distinctifs & particularites
+                    <span class="label-hint">Optionnel</span>
+                </label>
+                <textarea id="descriptif" name="descriptif" rows="2"
+                          class="ctrl-textarea"
+                          placeholder="Robe, couleur, pelage, tatouage, puce ou comportement..."></textarea>
+            </div>
+
+            <div class="card-actions">
                 <a href="<?= base_url('/') ?>" class="btn btn-secondary">Annuler</a>
+                <button type="submit" class="btn btn-primary">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="2.2">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    Enregistrer l'animal
+                </button>
             </div>
         </form>
     </div>
 </div>
 
 <script>
-    function onPhotoSelected(e) {
+    function previewSelectedPhoto(e) {
         const file = e.target.files[0];
         if (!file) return;
         const reader = new FileReader();
         reader.onload = function(evt) {
-            document.getElementById('previewImage').src = evt.target.result;
-            document.getElementById('dropPreview').style.display = 'block';
-            document.getElementById('dropPlaceholder').style.display = 'none';
+            const img = document.getElementById('imagePreviewTarget');
+            img.src = evt.target.result;
+            img.style.display = 'block';
+            document.getElementById('avatarEmpty').style.display = 'none';
         };
         reader.readAsDataURL(file);
     }

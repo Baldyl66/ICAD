@@ -1,10 +1,10 @@
-:root {
+﻿:root {
     --bg-app: #f4f6f8;
     --bg-surface: #ffffff;
-    --sidebar-bg: #090d16;
-    --sidebar-hover: #161f30;
-    --sidebar-text: #94a3b8;
-    --sidebar-text-active: #ffffff;
+    --sidebar-bg: #ffffff;
+    --sidebar-hover: #f1f5f9;
+    --sidebar-text: #475569;
+    --sidebar-text-active: #2563eb;
     --primary: #2563eb;
     --primary-hover: #1d4ed8;
     --primary-subtle: #eff6ff;
@@ -57,123 +57,111 @@ body.app-body {
     color: var(--sidebar-text);
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     padding: 24px 16px;
     position: fixed;
     top: 0;
     left: 0;
     bottom: 0;
     z-index: 50;
-    border-right: 1px solid rgba(255, 255, 255, 0.05);
+    border-right: 1px solid var(--border);
+    box-shadow: 2px 0 10px rgba(15, 23, 42, 0.03);
+}
+
+.sidebar-top {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 }
 
 .sidebar-brand {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 12px;
-    text-decoration: none;
-    color: #ffffff;
-    padding: 0 6px 24px 6px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    text-align: center;
+    gap: 10px;
+    padding: 0 6px 20px 6px;
+    border-bottom: 1px solid var(--border);
+    user-select: none;
 }
 
-.brand-square {
-    width: 36px;
-    height: 36px;
-    border-radius: var(--radius-sm);
-    background: linear-gradient(135deg, #2563eb, #0284c7);
-    color: #ffffff;
-    font-weight: 800;
-    font-size: 0.95rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    letter-spacing: -0.02em;
+.brand-logo-img {
+    width: 140px;
+    height: auto;
+    max-height: 85px;
+    object-fit: contain;
+    background-color: transparent;
+    pointer-events: none;
+    user-select: none;
+    transition: transform 0.2s ease;
 }
 
 .brand-info {
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 .brand-title {
-    font-size: 1.1rem;
-    font-weight: 700;
-    letter-spacing: -0.01em;
+    font-size: 1.25rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
     line-height: 1.1;
 }
 
 .brand-desc {
-    font-size: 0.7rem;
-    color: #64748b;
+    font-size: 0.74rem;
+    color: var(--text-secondary);
     text-transform: uppercase;
+    font-weight: 600;
     letter-spacing: 0.05em;
-    margin-top: 2px;
+    margin-top: 4px;
 }
 
 .sidebar-menu {
     display: flex;
     flex-direction: column;
-    gap: 4px;
-    margin-top: 24px;
-}
-
-.menu-label {
-    font-size: 0.68rem;
-    text-transform: uppercase;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    color: #475569;
-    padding: 0 10px 8px 10px;
+    align-items: center;
+    gap: 6px;
+    margin-top: 22px;
+    width: 100%;
 }
 
 .nav-link {
     display: flex;
     align-items: center;
-    gap: 12px;
-    padding: 10px 12px;
-    border-radius: var(--radius-sm);
+    justify-content: center;
+    text-align: center;
+    gap: 10px;
+    width: 100%;
+    padding: 10px 14px;
+    border-radius: var(--radius-md);
     text-decoration: none;
     font-size: 0.88rem;
-    font-weight: 500;
+    font-weight: 600;
     color: var(--sidebar-text);
+    border: 1px solid transparent;
     transition: all 0.15s ease;
+}
+
+.nav-link svg {
+    flex-shrink: 0;
 }
 
 .nav-link:hover {
     background-color: var(--sidebar-hover);
-    color: #ffffff;
+    color: var(--text-primary);
 }
 
 .nav-link.active {
-    background-color: var(--primary);
-    color: #ffffff;
+    background-color: var(--primary-subtle);
+    color: var(--primary);
     font-weight: 600;
+    border-color: rgba(37, 99, 235, 0.15);
 }
 
-.sidebar-bottom {
-    padding-top: 16px;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.system-status {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 6px 10px;
-    font-size: 0.78rem;
-    color: #64748b;
-}
-
-.status-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background-color: #10b981;
-    box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
-}
-
-/* Zone de contenu décalée pour la sidebar */
+/* Zone de contenu pour la sidebar */
 .main-wrapper {
     flex: 1;
     margin-left: 250px;
@@ -187,6 +175,8 @@ body.app-body {
     padding: 32px 36px 48px 36px;
     max-width: 1300px;
     width: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Composants de boutons modernes */
@@ -258,16 +248,17 @@ body.app-body {
 
 @media (max-width: 860px) {
     .sidebar {
-        width: 72px;
+        width: 80px;
         padding: 16px 8px;
     }
 
-    .brand-info, .menu-label, .nav-link span, .status-text {
+    .brand-info, .nav-link span {
         display: none;
     }
 
-    .brand-square {
-        margin: 0 auto;
+    .brand-logo-img {
+        width: 50px;
+        max-height: 40px;
     }
 
     .nav-link {
@@ -276,7 +267,7 @@ body.app-body {
     }
 
     .main-wrapper {
-        margin-left: 72px;
+        margin-left: 80px;
     }
 
     .page-content {

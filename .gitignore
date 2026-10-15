@@ -20,6 +20,10 @@
 /writable/uploads/*
 !/writable/uploads/index.html
 
+# Public uploads
+/public/uploads/*
+!/public/uploads/index.html
+
 # PHPUnit cache
 .phpunit.cache/
 .phpunit.result.cache

@@ -19,24 +19,17 @@ foreach ($animauxList as $item) {
 ?>
 
 <div class="view-root">
-    <!-- En-tete de vue -->
-    <header class="view-header">
-        <div class="view-titles">
-            <h1 class="view-heading">Registre des identifications</h1>
-            <p class="view-lead">Consultation, signalements et suivi des carnivores domestiques.</p>
+    <!-- En-tete de vue centre -->
+    <header class="registry-header">
+        <div class="header-titles-centered">
+            <h1 class="header-heading">Registre des identifications</h1>
+            <p class="header-lead">Base centrale de suivi et de gestion des carnivores domestiques declares.</p>
         </div>
 
-        <div class="view-actions">
-            <button type="button" id="exportBtn" class="btn btn-secondary">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                    <polyline points="7 10 12 15 17 10"></polyline>
-                    <line x1="12" y1="15" x2="12" y2="3"></line>
-                </svg>
-                Export CSV
-            </button>
+        <div class="header-action-right">
             <a href="<?= base_url('ajouter-animal'); ?>" class="btn btn-primary">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor" stroke-width="2.2">
                     <line x1="12" y1="5" x2="12" y2="19"></line>
                     <line x1="5" y1="12" x2="19" y2="12"></line>
                 </svg>
@@ -45,153 +38,75 @@ foreach ($animauxList as $item) {
         </div>
     </header>
 
-    <!-- Ruban de resume rapide -->
-    <div class="summary-ribbon">
-        <div class="ribbon-item">
-            <span class="ribbon-num"><?= $totalAnimaux ?></span>
-            <span class="ribbon-text">enregistres</span>
-        </div>
-        <div class="ribbon-sep"></div>
-        <div class="ribbon-item">
-            <span class="ribbon-num num-green"><?= $totalRetrouves ?></span>
-            <span class="ribbon-text">retrouves</span>
-        </div>
-        <div class="ribbon-sep"></div>
-        <div class="ribbon-item">
-            <span class="ribbon-num num-red"><?= $totalPerdus ?></span>
-            <span class="ribbon-text">recherches</span>
-        </div>
-    </div>
-
-    <!-- Barre d'outils unifiee -->
-    <div class="toolbar">
-        <div class="search-input-group">
-            <svg class="search-ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <!-- Barre unifiee : Recherche et Cartes KPI cliquables -->
+    <div class="unified-control-bar">
+        <div class="search-box">
+            <svg class="search-ico" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="2">
                 <circle cx="11" cy="11" r="8"></circle>
                 <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
             </svg>
-            <input type="text" id="quickSearch" class="search-field" placeholder="Rechercher par nom, ICAD ou proprietaire...">
+            <input type="text" id="quickSearch" class="search-input"
+                   placeholder="Rechercher par nom, puce ICAD, proprietaire...">
         </div>
 
-        <div class="toolbar-controls">
-            <div class="pill-group">
-                <button type="button" class="filter-tab active" data-filter="all">Tous</button>
-                <button type="button" class="filter-tab" data-filter="retrouve">Retrouves</button>
-                <button type="button" class="filter-tab" data-filter="perdu">Perdus</button>
-            </div>
+        <div class="kpi-filters-row">
+            <button type="button" class="kpi-card-btn active" data-filter="all" title="Filtrer : Tous les animaux">
+                <div class="kpi-icon icon-blue">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="3"></rect>
+                        <path d="M9 12h6"></path>
+                        <path d="M12 9v6"></path>
+                    </svg>
+                </div>
+                <div class="kpi-info">
+                    <span class="kpi-label">Tous</span>
+                    <span class="kpi-value"><?= $totalAnimaux ?></span>
+                </div>
+            </button>
 
-            <div class="display-toggle">
-                <button type="button" id="btnShowTable" class="toggle-btn active" title="Vue Tableau">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <line x1="8" y1="6" x2="21" y2="6"></line>
-                        <line x1="8" y1="12" x2="21" y2="12"></line>
-                        <line x1="8" y1="18" x2="21" y2="18"></line>
-                        <line x1="3" y1="6" x2="3.01" y2="6"></line>
-                        <line x1="3" y1="12" x2="3.01" y2="12"></line>
-                        <line x1="3" y1="18" x2="3.01" y2="18"></line>
+            <button type="button" class="kpi-card-btn" data-filter="retrouve" title="Filtrer : Animaux retrouves">
+                <div class="kpi-icon icon-emerald">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="2">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                        <polyline points="22 4 12 14.01 9 11.01"></polyline>
                     </svg>
-                </button>
-                <button type="button" id="btnShowCards" class="toggle-btn" title="Vue Grille">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="3" y="3" width="7" height="7"></rect>
-                        <rect x="14" y="3" width="7" height="7"></rect>
-                        <rect x="14" y="14" width="7" height="7"></rect>
-                        <rect x="3" y="14" width="7" height="7"></rect>
+                </div>
+                <div class="kpi-info">
+                    <span class="kpi-label">Retrouves</span>
+                    <span class="kpi-value text-emerald"><?= $totalRetrouves ?></span>
+                </div>
+            </button>
+
+            <button type="button" class="kpi-card-btn" data-filter="perdu" title="Filtrer : Animaux perdus">
+                <div class="kpi-icon icon-rose">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="8" x2="12" y2="12"></line>
+                        <line x1="12" y1="16" x2="12.01" y2="16"></line>
                     </svg>
-                </button>
-            </div>
+                </div>
+                <div class="kpi-info">
+                    <span class="kpi-label">Perdus</span>
+                    <span class="kpi-value text-rose"><?= $totalPerdus ?></span>
+                </div>
+            </button>
         </div>
     </div>
 
-    <div class="meta-status">
-        <span id="counterLabel"><?= $totalAnimaux ?> animal(aux) repertorie(s)</span>
-        <span id="toastCopy" class="toast-copy">Numero copie</span>
+    <!-- Statut des resultats -->
+    <div class="results-bar">
+        <span id="counterLabel" class="counter-text">
+            Affichage de <strong><?= $totalAnimaux ?></strong> animal(aux)
+        </span>
+        <span id="toastCopy" class="toast-copy">Identifiant copie dans le presse-papier</span>
     </div>
 
-    <!-- Conteneur Vue Tableau -->
-    <div class="data-surface" id="tableContainer">
-        <table class="app-table" id="tableMain">
-            <thead>
-                <tr>
-                    <th>Animal</th>
-                    <th>Age</th>
-                    <th>Identification</th>
-                    <th>Sexe</th>
-                    <th>Statut</th>
-                    <th>Proprietaire</th>
-                    <th class="th-actions">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php if (!empty($animauxList)): ?>
-                    <?php foreach ($animauxList as $animal): ?>
-                        <?php
-                        $isPerdu = (isset($animal['STATUE']) && strtolower($animal['STATUE']) === 'perdu');
-                        $photoPath = $animal['PHOTO'] ?? '';
-                        $photoFilename = basename($photoPath);
-                        $hasPhoto = (!empty($photoPath) && file_exists(FCPATH . 'uploads/' . $photoFilename));
-                        $statusSlug = $isPerdu ? 'perdu' : 'retrouve';
-                        $prop = trim(($animal['prenom_proprietaire'] ?? '') . ' ' . ($animal['nom_proprietaire'] ?? ''));
-                        ?>
-                        <tr class="table-row <?= $isPerdu ? 'is-lost' : '' ?>"
-                            data-name="<?= esc(strtolower($animal['PRENOM'] ?? '')) ?>"
-                            data-icad="<?= esc(strtolower($animal['ICAD'] ?? '')) ?>"
-                            data-prop="<?= esc(strtolower($prop)) ?>"
-                            data-status="<?= $statusSlug ?>">
-                            <td>
-                                <div class="cell-entity">
-                                    <div class="entity-thumb">
-                                        <?php if ($hasPhoto): ?>
-                                            <img src="<?= base_url('uploads/' . $photoFilename) ?>" alt="" class="thumb-img">
-                                        <?php else: ?>
-                                            <div class="thumb-fallback">
-                                                <?= strtoupper(substr(esc($animal['PRENOM'] ?? 'A'), 0, 1)) ?>
-                                            </div>
-                                        <?php endif; ?>
-                                    </div>
-                                    <div class="entity-meta">
-                                        <span class="entity-name"><?= esc($animal['PRENOM']) ?></span>
-                                        <span class="entity-sub"><?= esc(mb_strimwidth($animal['DESCRIPTIF'] ?? '', 0, 30, '...')) ?></span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td><?= esc($animal['AGE']) ?> ans</td>
-                            <td>
-                                <button type="button" class="badge-chip" data-copy="<?= esc($animal['ICAD']) ?>" title="Copier le numero">
-                                    <span><?= esc($animal['ICAD']) ?></span>
-                                </button>
-                            </td>
-                            <td><?= esc($animal['SEXE']) ?></td>
-                            <td>
-                                <span class="badge <?= $isPerdu ? 'badge-danger' : 'badge-success' ?>">
-                                    <span class="badge-dot"></span>
-                                    <?= $isPerdu ? 'Perdu' : 'Retrouve' ?>
-                                </span>
-                            </td>
-                            <td>
-                                <div class="prop-cell">
-                                    <span class="prop-title"><?= esc($prop ?: 'Non renseigne') ?></span>
-                                    <small class="prop-sub"><?= esc($animal['TELEPHONE'] ?? '') ?></small>
-                                </div>
-                            </td>
-                            <td class="th-actions">
-                                <a href="<?= base_url('animal/' . $animal['ICAD']); ?>" class="row-link">
-                                    Consulter
-                                </a>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                <?php else: ?>
-                    <tr>
-                        <td colspan="7" class="cell-empty">Aucune donnee enregistree.</td>
-                    </tr>
-                <?php endif; ?>
-            </tbody>
-        </table>
-    </div>
-
-    <!-- Conteneur Vue Grille -->
-    <div class="cards-deck" id="cardsContainer" style="display: none;">
+    <!-- Grille de blocs d'animaux -->
+    <div class="cards-grid" id="cardsContainer">
         <?php if (!empty($animauxList)): ?>
             <?php foreach ($animauxList as $animal): ?>
                 <?php
@@ -200,155 +115,163 @@ foreach ($animauxList as $item) {
                 $photoFilename = basename($photoPath);
                 $hasPhoto = (!empty($photoPath) && file_exists(FCPATH . 'uploads/' . $photoFilename));
                 $statusSlug = $isPerdu ? 'perdu' : 'retrouve';
-                $prop = trim(($animal['prenom_proprietaire'] ?? '') . ' ' . ($animal['nom_proprietaire'] ?? ''));
+                $prop = trim(($animal['prenom_proprietaire'] ?? '') . ' ' .
+                             ($animal['nom_proprietaire'] ?? ''));
+                $initiale = strtoupper(substr(esc($animal['PRENOM'] ?? 'A'), 0, 1));
                 ?>
-                <div class="deck-card <?= $isPerdu ? 'deck-lost' : '' ?>"
+                <div class="animal-card <?= $isPerdu ? 'card-lost' : '' ?>"
                      data-name="<?= esc(strtolower($animal['PRENOM'] ?? '')) ?>"
                      data-icad="<?= esc(strtolower($animal['ICAD'] ?? '')) ?>"
                      data-prop="<?= esc(strtolower($prop)) ?>"
                      data-status="<?= $statusSlug ?>">
-                    <div class="deck-media">
+                    
+                    <!-- Media de la carte -->
+                    <div class="card-media">
                         <?php if ($hasPhoto): ?>
-                            <img src="<?= base_url('uploads/' . $photoFilename) ?>" alt="" class="deck-img">
+                            <img src="<?= base_url('uploads/' . $photoFilename) ?>"
+                                 alt="<?= esc($animal['PRENOM']) ?>" class="card-img">
                         <?php else: ?>
-                            <div class="deck-empty-photo">
-                                <?= strtoupper(substr(esc($animal['PRENOM'] ?? 'A'), 0, 1)) ?>
+                            <div class="card-placeholder-bg">
+                                <div class="avatar-monogram"><?= $initiale ?></div>
                             </div>
                         <?php endif; ?>
-                        <span class="badge <?= $isPerdu ? 'badge-danger' : 'badge-success' ?> deck-status-badge">
-                            <span class="badge-dot"></span>
-                            <?= $isPerdu ? 'Perdu' : 'Retrouve' ?>
-                        </span>
+
+                        <!-- Badges Statuts avec la meme DA -->
+                        <?php if ($isPerdu): ?>
+                            <span class="badge-status-pill badge-lost">
+                                <span class="badge-dot-rose"></span>
+                                Perdu
+                            </span>
+                        <?php else: ?>
+                            <span class="badge-status-pill badge-found">
+                                <span class="badge-dot-emerald"></span>
+                                Retrouve
+                            </span>
+                        <?php endif; ?>
                     </div>
 
-                    <div class="deck-body">
-                        <div class="deck-top">
-                            <h3 class="deck-title"><?= esc($animal['PRENOM']) ?></h3>
-                            <span class="deck-age"><?= esc($animal['AGE']) ?> ans</span>
+                    <!-- Contenu de la fiche -->
+                    <div class="card-content">
+                        <div class="card-header-row">
+                            <h3 class="card-animal-name"><?= esc($animal['PRENOM']) ?></h3>
+                            <span class="card-age-pill"><?= esc($animal['AGE']) ?> ans</span>
                         </div>
 
-                        <div class="deck-specs">
-                            <span class="spec-chip">ID: <?= esc($animal['ICAD']) ?></span>
-                            <span class="spec-gender"><?= esc($animal['SEXE']) ?></span>
+                        <div class="card-badges-row">
+                            <button type="button" class="icad-badge-btn"
+                                    data-copy="<?= esc($animal['ICAD']) ?>"
+                                    title="Cliquer pour copier l'identifiant">
+                                <span class="mono-id">#<?= esc($animal['ICAD']) ?></span>
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none"
+                                     stroke="currentColor" stroke-width="2">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                </svg>
+                            </button>
+                            <span class="card-gender-pill"><?= esc($animal['SEXE']) ?></span>
                         </div>
 
                         <?php if (!empty($animal['DESCRIPTIF'])): ?>
-                            <p class="deck-desc"><?= esc(mb_strimwidth($animal['DESCRIPTIF'], 0, 65, '...')) ?></p>
+                            <p class="card-desc-txt">
+                                <?= esc(mb_strimwidth($animal['DESCRIPTIF'], 0, 78, '...')) ?>
+                            </p>
                         <?php endif; ?>
 
-                        <div class="deck-bottom">
-                            <span class="deck-owner"><?= esc($prop ?: 'Proprietaire inconnu') ?></span>
-                            <a href="<?= base_url('animal/' . $animal['ICAD']); ?>" class="row-link">Fiche</a>
+                        <div class="card-footer-box">
+                            <div class="owner-meta-block">
+                                <span class="owner-tiny-lbl">Titulaire</span>
+                                <span class="owner-main-name"><?= esc($prop ?: 'Non renseigne') ?></span>
+                                <?php if (!empty($animal['TELEPHONE'])): ?>
+                                    <span class="owner-tel-link"><?= esc($animal['TELEPHONE']) ?></span>
+                                <?php endif; ?>
+                            </div>
+                            <a href="<?= base_url('animal/' . $animal['ICAD']); ?>" class="btn-consult-action">
+                                <span>Fiche</span>
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                     stroke="currentColor" stroke-width="2.2">
+                                    <polyline points="9 18 15 12 9 6"></polyline>
+                                </svg>
+                            </a>
                         </div>
                     </div>
                 </div>
             <?php endforeach; ?>
         <?php endif; ?>
+
+        <!-- Etat vide si aucun resultat -->
+        <div id="noResultsBlock" class="empty-results-box" style="display: none;">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="1.6">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                <line x1="8" y1="11" x2="14" y2="11"></line>
+            </svg>
+            <h3 class="empty-title">Aucun animal trouve</h3>
+            <p class="empty-sub">Modifiez votre recherche ou vos filtres pour voir les fiches.</p>
+        </div>
     </div>
 </div>
 
 <script>
     (function() {
         const search = document.getElementById('quickSearch');
-        const filterTabs = document.querySelectorAll('.filter-tab');
+        const kpiFilters = document.querySelectorAll('.kpi-card-btn');
         const counter = document.getElementById('counterLabel');
         const toast = document.getElementById('toastCopy');
-        const btnTable = document.getElementById('btnShowTable');
-        const btnCards = document.getElementById('btnShowCards');
-        const tableBox = document.getElementById('tableContainer');
-        const cardsBox = document.getElementById('cardsContainer');
-        const exportBtn = document.getElementById('exportBtn');
+        const noResults = document.getElementById('noResultsBlock');
 
         let activeFilter = 'all';
 
         function updateList() {
             const query = search.value.trim().toLowerCase();
-            const rows = document.querySelectorAll('#tableMain tbody tr.table-row');
-            const cards = document.querySelectorAll('.deck-card');
-            let count = 0;
+            const cards = document.querySelectorAll('.animal-card');
+            let visibleCount = 0;
 
-            function matches(item) {
-                const name = item.getAttribute('data-name') || '';
-                const icad = item.getAttribute('data-icad') || '';
-                const prop = item.getAttribute('data-prop') || '';
-                const status = item.getAttribute('data-status') || '';
+            function checkMatch(card) {
+                const name = card.getAttribute('data-name') || '';
+                const icad = card.getAttribute('data-icad') || '';
+                const prop = card.getAttribute('data-prop') || '';
+                const status = card.getAttribute('data-status') || '';
 
                 const qMatch = name.includes(query) || icad.includes(query) || prop.includes(query);
                 const fMatch = (activeFilter === 'all') || (status === activeFilter);
-                const visible = qMatch && fMatch;
+                const ok = qMatch && fMatch;
 
-                item.style.display = visible ? '' : 'none';
-                return visible;
+                card.style.display = ok ? '' : 'none';
+                return ok;
             }
 
-            rows.forEach(function(row) {
-                if (matches(row)) count++;
-            });
-
             cards.forEach(function(card) {
-                matches(card);
+                if (checkMatch(card)) visibleCount++;
             });
 
-            counter.textContent = count + ' animal(aux) repertorie(s)';
+            if (noResults) {
+                noResults.style.display = (visibleCount === 0) ? 'flex' : 'none';
+            }
+
+            counter.innerHTML = 'Affichage de <strong>' + visibleCount + '</strong> animal(aux)';
         }
 
         search.addEventListener('input', updateList);
 
-        filterTabs.forEach(function(tab) {
-            tab.addEventListener('click', function() {
-                filterTabs.forEach(function(t) { t.classList.remove('active'); });
+        kpiFilters.forEach(function(kpiBtn) {
+            kpiBtn.addEventListener('click', function() {
+                kpiFilters.forEach(function(b) { b.classList.remove('active'); });
                 this.classList.add('active');
                 activeFilter = this.getAttribute('data-filter');
                 updateList();
             });
         });
 
-        btnTable.addEventListener('click', function() {
-            btnTable.classList.add('active');
-            btnCards.classList.remove('active');
-            tableBox.style.display = '';
-            cardsBox.style.display = 'none';
-        });
-
-        btnCards.addEventListener('click', function() {
-            btnCards.classList.add('active');
-            btnTable.classList.remove('active');
-            tableBox.style.display = 'none';
-            cardsBox.style.display = 'grid';
-        });
-
-        document.querySelectorAll('.badge-chip').forEach(function(chip) {
-            chip.addEventListener('click', function() {
-                const text = this.getAttribute('data-copy');
+        document.querySelectorAll('.icad-badge-btn').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                const num = this.getAttribute('data-copy');
                 if (!navigator.clipboard) return;
-                navigator.clipboard.writeText(text).then(function() {
-                    toast.style.opacity = '1';
-                    setTimeout(function() { toast.style.opacity = '0'; }, 1800);
+                navigator.clipboard.writeText(num).then(function() {
+                    toast.classList.add('visible');
+                    setTimeout(function() { toast.classList.remove('visible'); }, 2000);
                 });
             });
-        });
-
-        exportBtn.addEventListener('click', function() {
-            const rows = document.querySelectorAll('#tableMain tbody tr.table-row');
-            let csv = '\uFEFFNumero_ICAD;Prenom;Age;Sexe;Statut;Proprietaire\n';
-
-            rows.forEach(function(row) {
-                if (row.style.display !== 'none') {
-                    const name = row.querySelector('.entity-name')?.textContent.trim() || '';
-                    const age = row.querySelector('td:nth-child(2)')?.textContent.trim() || '';
-                    const icad = row.getAttribute('data-icad') || '';
-                    const sexe = row.querySelector('td:nth-child(4)')?.textContent.trim() || '';
-                    const status = row.getAttribute('data-status') || '';
-                    const prop = row.querySelector('.prop-title')?.textContent.trim() || '';
-                    csv += `"${icad}";"${name}";"${age}";"${sexe}";"${status}";"${prop}"\n`;
-                }
-            });
-
-            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(blob);
-            link.download = 'registre_icad_' + new Date().toISOString().slice(0, 10) + '.csv';
-            link.click();
         });
     })();
 </script>
