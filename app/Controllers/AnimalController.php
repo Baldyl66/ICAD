@@ -6,18 +6,26 @@ use App\Models\AnimalModel;
 
 class AnimalController extends BaseController
 {
-    // Afficher les détails d'un animal
+    /**
+     * Affiche les details complets d'un animal selectionne
+     */
     public function details($icad)
     {
         $animalModel = new AnimalModel();
-        $animal = $animalModel->where('ICAD', $icad)->first();
+        $animal = $animalModel->select('animal.*, ' .
+                                       'proprietaire.NOM AS nom_proprietaire, ' .
+                                       'proprietaire.PRENOM AS prenom_proprietaire, ' .
+                                       'proprietaire.TELEPHONE AS tel_proprietaire, ' .
+                                       'proprietaire.EMAIL AS email_proprietaire, ' .
+                                       'proprietaire.ADRESSE AS adresse_proprietaire')
+                              ->join('proprietaire', 'animal.IDENTIFIANT = proprietaire.IDENTIFIANT', 'left')
+                              ->where('animal.ICAD', $icad)
+                              ->first();
 
-        // Si l'animal n'est pas trouvé, rediriger vers la liste des animaux
         if (!$animal) {
-            return redirect()->to('/animaux');
+            return redirect()->to(base_url('/'));
         }
 
-        // Afficher la vue avec les détails de l'animal
         return view('animal_details', ['animal' => $animal]);
     }
 }
