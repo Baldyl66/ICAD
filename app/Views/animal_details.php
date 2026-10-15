@@ -6,14 +6,14 @@
 <?php
 $isPerdu = (isset($animal['STATUE']) && strtolower($animal['STATUE']) === 'perdu');
 $photoPath = $animal['PHOTO'] ?? '';
-$photoFilename = basename(str_replace('C:\\xampp\\htdocs\\icad.local\\icad\\writable\\', '', $photoPath));
+$photoFilename = basename($photoPath);
 $hasPhoto = (!empty($photoPath) && file_exists(FCPATH . 'uploads/' . $photoFilename));
 ?>
 
-<div class="details-page">
-    <div class="details-nav-bar">
+<div class="profile-container">
+    <div class="profile-breadcrumb">
         <a href="<?= base_url('/') ?>" class="back-link">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <line x1="19" y1="12" x2="5" y2="12"></line>
                 <polyline points="12 19 5 12 12 5"></polyline>
             </svg>
@@ -21,66 +21,32 @@ $hasPhoto = (!empty($photoPath) && file_exists(FCPATH . 'uploads/' . $photoFilen
         </a>
     </div>
 
-    <div class="profile-card <?= $isPerdu ? 'profile-lost' : '' ?>">
-        <div class="profile-top">
-            <div class="profile-photo-col">
-                <div class="photo-box">
-                    <?php if ($hasPhoto): ?>
-                        <img src="<?= base_url('uploads/' . $photoFilename) ?>" alt="Photo de <?= esc($animal['PRENOM']) ?>" class="profile-img">
-                    <?php else: ?>
-                        <div class="photo-fallback">
-                            <span><?= strtoupper(substr(esc($animal['PRENOM'] ?? 'A'), 0, 1)) ?></span>
-                        </div>
-                    <?php endif; ?>
-                </div>
+    <div class="profile-panel <?= $isPerdu ? 'panel-lost' : '' ?>">
+        <div class="panel-hero">
+            <div class="hero-photo">
+                <?php if ($hasPhoto): ?>
+                    <img src="<?= base_url('uploads/' . $photoFilename) ?>" alt="" class="hero-img">
+                <?php else: ?>
+                    <div class="hero-empty">
+                        <?= strtoupper(substr(esc($animal['PRENOM'] ?? 'A'), 0, 1)) ?>
+                    </div>
+                <?php endif; ?>
             </div>
 
-            <div class="profile-header-col">
-                <div class="profile-status-row">
+            <div class="hero-details">
+                <div class="hero-tag-row">
                     <span class="badge <?= $isPerdu ? 'badge-danger' : 'badge-success' ?>">
-                        <?= $isPerdu ? 'Perdu' : 'Retrouve' ?>
+                        <span class="badge-dot"></span>
+                        <?= $isPerdu ? 'Signale perdu' : 'Retrouve' ?>
                     </span>
-                    <span class="profile-id">Identifiant : <strong><?= esc($animal['ICAD']) ?></strong></span>
+                    <span class="hero-id">ICAD #<?= esc($animal['ICAD']) ?></span>
                 </div>
-                <h1 class="profile-title"><?= esc($animal['PRENOM']) ?></h1>
-                <p class="profile-subtitle">Carnivore domestique &bull; <?= esc($animal['SEXE']) ?></p>
+
+                <h1 class="hero-name"><?= esc($animal['PRENOM']) ?></h1>
+                <p class="hero-meta"><?= esc($animal['SEXE']) ?> &bull; <?= esc($animal['AGE']) ?> ans</p>
             </div>
-        </div>
 
-        <div class="profile-body">
-            <h2 class="section-title">Caracteristiques</h2>
-            <div class="specs-grid">
-                <div class="spec-item">
-                    <span class="spec-label">Age</span>
-                    <span class="spec-value"><?= esc($animal['AGE']) ?> ans</span>
-                </div>
-
-                <div class="spec-item">
-                    <span class="spec-label">Sexe</span>
-                    <span class="spec-value"><?= esc($animal['SEXE']) ?></span>
-                </div>
-
-                <div class="spec-item">
-                    <span class="spec-label">Numero I-CAD</span>
-                    <span class="spec-value font-mono"><?= esc($animal['ICAD']) ?></span>
-                </div>
-
-                <div class="spec-item">
-                    <span class="spec-label">Statut actuel</span>
-                    <span class="spec-value"><?= $isPerdu ? 'Signale perdu' : 'Retrouve' ?></span>
-                </div>
-
-                <div class="spec-item full-width">
-                    <span class="spec-label">Descriptif & particularites</span>
-                    <p class="spec-desc">
-                        <?= !empty($animal['DESCRIPTIF']) ? nl2br(esc($animal['DESCRIPTIF'])) : 'Aucune information particuliere renseignee.' ?>
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <div class="profile-actions">
-            <div class="actions-left">
+            <div class="hero-actions">
                 <a href="<?= base_url('ModificationAnimalController/index/' . $animal['ICAD']) ?>" class="btn btn-primary">
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M12 20h9"></path>
@@ -88,21 +54,42 @@ $hasPhoto = (!empty($photoPath) && file_exists(FCPATH . 'uploads/' . $photoFilen
                     </svg>
                     Modifier
                 </a>
-                <a href="<?= base_url('/') ?>" class="btn btn-secondary">
-                    Retour
-                </a>
-            </div>
-
-            <div class="actions-right">
-                <form action="<?= base_url('AnimauxController/delete/' . $animal['ICAD']) ?>" method="post" onsubmit="return confirm('Confirmer la suppression de cette fiche ? Cette action est definitive.')">
-                    <button type="submit" class="btn btn-danger">
+                <form action="<?= base_url('AnimauxController/delete/' . $animal['ICAD']) ?>" method="post" onsubmit="return confirm('Confirmer la suppression de cette fiche ?')">
+                    <button type="submit" class="btn btn-secondary btn-del" title="Supprimer">
                         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <polyline points="3 6 5 6 21 6"></polyline>
-                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path>
                         </svg>
-                        Supprimer
                     </button>
                 </form>
+            </div>
+        </div>
+
+        <div class="panel-content">
+            <div class="info-section">
+                <h3 class="info-heading">Signes particuliers</h3>
+                <p class="info-text">
+                    <?= !empty($animal['DESCRIPTIF']) ? nl2br(esc($animal['DESCRIPTIF'])) : 'Aucune description ou particularite specifiee.' ?>
+                </p>
+            </div>
+
+            <div class="data-matrix">
+                <div class="matrix-cell">
+                    <span class="cell-label">Numero d'identification</span>
+                    <span class="cell-val mono"><?= esc($animal['ICAD']) ?></span>
+                </div>
+                <div class="matrix-cell">
+                    <span class="cell-label">Age</span>
+                    <span class="cell-val"><?= esc($animal['AGE']) ?> ans</span>
+                </div>
+                <div class="matrix-cell">
+                    <span class="cell-label">Sexe</span>
+                    <span class="cell-val"><?= esc($animal['SEXE']) ?></span>
+                </div>
+                <div class="matrix-cell">
+                    <span class="cell-label">Statut</span>
+                    <span class="cell-val"><?= $isPerdu ? 'Perdu' : 'Retrouve' ?></span>
+                </div>
             </div>
         </div>
     </div>

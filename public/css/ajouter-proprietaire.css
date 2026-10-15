@@ -1,13 +1,13 @@
-/* Page de formulaire d'ajout de proprietaire */
-.form-page {
-    max-width: 760px;
+/* Formulaire Proprietaire - Style Studio */
+.form-layout {
+    max-width: 800px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
     gap: 16px;
 }
 
-.form-header-bar {
+.form-nav {
     display: flex;
     align-items: center;
 }
@@ -16,138 +16,133 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    font-size: 0.9rem;
+    font-size: 0.84rem;
     font-weight: 600;
-    color: var(--text-muted);
+    color: var(--text-secondary);
     text-decoration: none;
-    transition: color var(--transition-fast);
+    transition: color 0.15s ease;
 }
 
 .back-link:hover {
     color: var(--primary);
 }
 
-.form-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-md);
-    padding: 36px;
+.form-panel {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-card);
+    padding: 32px;
 }
 
-.form-title-area {
-    margin-bottom: 28px;
-    border-bottom: 1px solid var(--border-color);
-    padding-bottom: 18px;
+.panel-header {
+    margin-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 16px;
 }
 
-.form-title {
-    font-size: 1.6rem;
+.panel-title {
+    font-size: 1.4rem;
     font-weight: 700;
-    color: var(--text-main);
-    margin: 0 0 6px 0;
+    color: var(--text-primary);
+    margin: 0 0 4px 0;
     letter-spacing: -0.01em;
 }
 
-.form-subtitle {
-    margin: 0;
-    color: var(--text-muted);
-    font-size: 0.92rem;
+.panel-desc {
+    font-size: 0.86rem;
+    color: var(--text-secondary);
 }
 
-.form-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+.app-form {
+    display: flex;
+    flex-direction: column;
     gap: 20px;
 }
 
-.form-field {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+.fields-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
 }
 
-.form-field.full-width {
+.field-item {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.field-item.full-col {
     grid-column: 1 / -1;
 }
 
-.field-label {
+.input-label {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-size: 0.88rem;
+    font-size: 0.8rem;
     font-weight: 600;
-    color: var(--text-main);
+    color: var(--text-primary);
 }
 
-.badge-auto {
-    font-size: 0.75rem;
-    font-weight: 500;
+.auto-tag {
+    font-size: 0.72rem;
+    font-weight: 600;
     color: var(--primary);
-    background-color: var(--primary-light);
-    padding: 2px 8px;
-    border-radius: var(--radius-full);
+    background-color: var(--primary-subtle);
+    padding: 1px 6px;
+    border-radius: var(--radius-pill);
 }
 
-.form-control {
+.text-input {
     width: 100%;
-    padding: 10px 14px;
-    font-size: 0.92rem;
+    padding: 9px 12px;
+    font-size: 0.88rem;
     font-family: inherit;
-    color: var(--text-main);
+    color: var(--text-primary);
     background-color: #f8fafc;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--border);
     border-radius: var(--radius-sm);
-    transition: all var(--transition-fast);
+    transition: all 0.15s ease;
 }
 
-.form-control:focus {
+.text-input:focus {
     outline: none;
+    border-color: var(--primary);
     background-color: #ffffff;
-    border-color: var(--border-focus);
-    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
 }
 
-.readonly-control {
+.text-input.mono {
+    font-family: var(--font-mono);
+}
+
+.text-input.readonly {
     background-color: #f1f5f9;
-    color: #475569;
-    font-weight: 600;
+    color: var(--text-secondary);
     cursor: not-allowed;
-    border-color: #cbd5e1;
 }
 
-textarea.form-control {
+.text-input.textarea {
     resize: vertical;
-    min-height: 90px;
+    min-height: 80px;
 }
 
-.form-actions {
+.panel-footer {
     display: flex;
     align-items: center;
-    gap: 12px;
-    margin-top: 32px;
+    gap: 10px;
+    margin-top: 12px;
     padding-top: 20px;
-    border-top: 1px solid var(--border-color);
+    border-top: 1px solid var(--border);
 }
 
-.submit-btn {
-    padding: 12px 24px;
-}
-
-@media (max-width: 640px) {
-    .form-card {
-        padding: 24px 16px;
+@media (max-width: 600px) {
+    .form-panel {
+        padding: 20px 16px;
     }
 
-    .form-grid {
+    .fields-grid {
         grid-template-columns: 1fr;
-    }
-
-    .form-actions {
-        flex-direction: column;
-    }
-
-    .form-actions .btn {
-        width: 100%;
     }
 }

@@ -1,13 +1,13 @@
-/* Page de formulaire d'ajout d'animal */
-.form-page {
-    max-width: 760px;
+/* Formulaire Animal - Style Studio */
+.form-layout {
+    max-width: 800px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
     gap: 16px;
 }
 
-.form-header-bar {
+.form-nav {
     display: flex;
     align-items: center;
 }
@@ -16,109 +16,79 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    font-size: 0.9rem;
+    font-size: 0.84rem;
     font-weight: 600;
-    color: var(--text-muted);
+    color: var(--text-secondary);
     text-decoration: none;
-    transition: color var(--transition-fast);
+    transition: color 0.15s ease;
 }
 
 .back-link:hover {
     color: var(--primary);
 }
 
-.form-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-md);
-    padding: 36px;
+.form-panel {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-card);
+    padding: 32px;
 }
 
-.form-title-area {
-    margin-bottom: 28px;
-    border-bottom: 1px solid var(--border-color);
-    padding-bottom: 18px;
+.panel-header {
+    margin-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 16px;
 }
 
-.form-title {
-    font-size: 1.6rem;
+.panel-title {
+    font-size: 1.4rem;
     font-weight: 700;
-    color: var(--text-main);
-    margin: 0 0 6px 0;
+    color: var(--text-primary);
+    margin: 0 0 4px 0;
     letter-spacing: -0.01em;
 }
 
-.form-subtitle {
-    margin: 0;
-    color: var(--text-muted);
-    font-size: 0.92rem;
+.panel-desc {
+    font-size: 0.86rem;
+    color: var(--text-secondary);
 }
 
-.form-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+.app-form {
+    display: flex;
+    flex-direction: column;
     gap: 20px;
 }
 
-.form-field {
+.form-sections {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.upload-area {
     display: flex;
     flex-direction: column;
     gap: 8px;
 }
 
-.form-field.full-width {
-    grid-column: 1 / -1;
-}
-
-.field-label {
-    font-size: 0.88rem;
-    font-weight: 600;
-    color: var(--text-main);
-}
-
-.form-control {
-    width: 100%;
-    padding: 10px 14px;
-    font-size: 0.92rem;
-    font-family: inherit;
-    color: var(--text-main);
-    background-color: #f8fafc;
-    border: 1px solid var(--border-color);
+.drop-zone {
+    border: 2px dashed var(--border);
     border-radius: var(--radius-sm);
-    transition: all var(--transition-fast);
-}
-
-.form-control:focus {
-    outline: none;
-    background-color: #ffffff;
-    border-color: var(--border-focus);
-    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
-}
-
-textarea.form-control {
-    resize: vertical;
-    min-height: 90px;
-}
-
-/* Zone d'upload */
-.upload-zone {
-    border: 2px dashed var(--border-color);
-    border-radius: var(--radius-md);
-    padding: 24px;
+    padding: 20px;
+    background-color: #f8fafc;
     text-align: center;
     position: relative;
-    background-color: #f8fafc;
     cursor: pointer;
-    transition: all var(--transition-fast);
+    transition: all 0.15s ease;
 }
 
-.upload-zone:hover {
+.drop-zone:hover {
     border-color: var(--primary);
-    background-color: var(--primary-light);
+    background-color: var(--primary-subtle);
 }
 
-.file-input {
+.file-native {
     position: absolute;
     inset: 0;
     width: 100%;
@@ -127,78 +97,114 @@ textarea.form-control {
     cursor: pointer;
 }
 
-.upload-prompt {
+.drop-placeholder {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
-    color: var(--text-muted);
-    font-size: 0.88rem;
+    gap: 6px;
+    color: var(--text-tertiary);
+    font-size: 0.82rem;
 }
 
-.upload-prompt svg {
-    color: var(--primary);
+.drop-placeholder svg {
+    color: var(--text-secondary);
 }
 
-.preview-wrapper {
-    margin-top: 16px;
+.drop-preview {
+    text-align: center;
 }
 
-.photo-preview-img {
-    max-width: 180px;
-    max-height: 180px;
+.preview-img {
+    max-width: 140px;
+    max-height: 140px;
+    border-radius: var(--radius-sm);
     object-fit: cover;
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-sm);
-    border: 2px solid #ffffff;
+    border: 1px solid var(--border);
 }
 
-/* Actions */
-.form-actions {
+.fields-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.field-item {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.field-item.full-col {
+    grid-column: 1 / -1;
+}
+
+.input-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.text-input, .select-input {
+    width: 100%;
+    padding: 9px 12px;
+    font-size: 0.88rem;
+    font-family: inherit;
+    color: var(--text-primary);
+    background-color: #f8fafc;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    transition: all 0.15s ease;
+}
+
+.text-input:focus, .select-input:focus {
+    outline: none;
+    border-color: var(--primary);
+    background-color: #ffffff;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.text-input.mono {
+    font-family: var(--font-mono);
+}
+
+.text-input.textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.panel-footer {
     display: flex;
     align-items: center;
-    gap: 12px;
-    margin-top: 32px;
+    gap: 10px;
+    margin-top: 12px;
     padding-top: 20px;
-    border-top: 1px solid var(--border-color);
-}
-
-.submit-btn {
-    padding: 12px 24px;
+    border-top: 1px solid var(--border);
 }
 
 .alert-box {
-    padding: 14px 18px;
+    background-color: var(--danger-bg);
+    border: 1px solid rgba(225, 29, 72, 0.2);
     border-radius: var(--radius-sm);
-    font-size: 0.9rem;
+    padding: 12px 16px;
     margin-bottom: 20px;
+    font-size: 0.84rem;
+    color: var(--danger);
+}
+
+.alert-title {
+    font-weight: 700;
 }
 
 .alert-box ul {
-    margin: 8px 0 0 18px;
-    padding: 0;
+    margin: 6px 0 0 16px;
 }
 
-.alert-danger {
-    background-color: var(--danger-bg);
-    color: var(--danger-text);
-    border: 1px solid rgba(239, 68, 68, 0.2);
-}
-
-@media (max-width: 640px) {
-    .form-card {
-        padding: 24px 16px;
+@media (max-width: 600px) {
+    .form-panel {
+        padding: 20px 16px;
     }
 
-    .form-grid {
+    .fields-grid {
         grid-template-columns: 1fr;
-    }
-
-    .form-actions {
-        flex-direction: column;
-    }
-
-    .form-actions .btn {
-        width: 100%;
     }
 }

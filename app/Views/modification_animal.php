@@ -6,15 +6,14 @@
 <?php
 $isPerdu = (isset($animal['STATUE']) && strtoupper($animal['STATUE']) === 'PERDU');
 $photoPath = $animal['PHOTO'] ?? '';
-$photoRelativePath = str_replace('C:\\xampp\\htdocs\\icad.local\\icad\\writable\\', '', $photoPath);
-$photoFilename = basename($photoRelativePath);
+$photoFilename = basename($photoPath);
 $hasPhoto = (!empty($photoPath) && file_exists(FCPATH . 'uploads/' . $photoFilename));
 ?>
 
-<div class="form-page">
-    <div class="form-header-bar">
+<div class="form-layout">
+    <div class="form-nav">
         <a href="<?= base_url('animal/' . $animal['ICAD']) ?>" class="back-link">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <line x1="19" y1="12" x2="5" y2="12"></line>
                 <polyline points="12 19 5 12 12 5"></polyline>
             </svg>
@@ -22,98 +21,90 @@ $hasPhoto = (!empty($photoPath) && file_exists(FCPATH . 'uploads/' . $photoFilen
         </a>
     </div>
 
-    <div class="form-card <?= $isPerdu ? 'card-lost' : '' ?>">
-        <div class="form-title-area">
-            <div class="title-with-badge">
-                <h1 class="form-title">Modifier l'animal : <?= esc($animal['PRENOM']) ?></h1>
-                <?php if ($isPerdu): ?>
-                    <span class="badge badge-danger">Statut Perdu</span>
-                <?php else: ?>
-                    <span class="badge badge-success">Statut Retrouve</span>
-                <?php endif; ?>
+    <div class="form-panel <?= $isPerdu ? 'panel-lost' : '' ?>">
+        <div class="panel-header">
+            <div class="title-row">
+                <h1 class="panel-title">Modifier : <?= esc($animal['PRENOM']) ?></h1>
+                <span class="badge <?= $isPerdu ? 'badge-danger' : 'badge-success' ?>">
+                    <span class="badge-dot"></span>
+                    <?= $isPerdu ? 'Perdu' : 'Retrouve' ?>
+                </span>
             </div>
-            <p class="form-subtitle">Mise a jour des donnees et du statut d'identification.</p>
+            <p class="panel-desc">Mise a jour des donnees d'identification et du statut de l'animal.</p>
         </div>
 
-        <form action="<?= base_url('ModificationAnimalController/modifier/' . esc($animal['ICAD'])) ?>" method="post" enctype="multipart/form-data" class="modern-form">
+        <form action="<?= base_url('ModificationAnimalController/modifier/' . esc($animal['ICAD'])) ?>" method="post" enctype="multipart/form-data" class="app-form">
             <?= csrf_field() ?>
 
-            <div class="photo-edit-section">
-                <div class="current-photo-wrap">
+            <div class="media-update-block">
+                <div class="current-media">
                     <?php if ($hasPhoto): ?>
-                        <img id="photo-preview" src="<?= base_url('uploads/' . $photoFilename) ?>" alt="Photo de <?= esc($animal['PRENOM']) ?>" class="current-photo">
+                        <img id="editPreview" src="<?= base_url('uploads/' . $photoFilename) ?>" alt="" class="media-img">
                     <?php else: ?>
-                        <div id="no-photo-badge" class="no-photo-box">Aucune photo</div>
-                        <img id="photo-preview" src="" alt="Apercu" class="current-photo" style="display: none;">
+                        <div id="noPhotoTag" class="media-empty">Sans photo</div>
+                        <img id="editPreview" src="" alt="" class="media-img" style="display: none;">
                     <?php endif; ?>
                 </div>
-                <div class="photo-input-wrap">
-                    <label class="field-label" for="photo">Remplacer la photo</label>
-                    <input type="file" id="photo" name="photo" accept="image/*" class="form-control" onchange="previewEditPhoto(event)">
-                    <small class="photo-hint">Format JPG, PNG ou WEBP. Laissez vide pour conserver la photo actuelle.</small>
+
+                <div class="media-picker">
+                    <label class="input-label" for="photo">Changer la photo</label>
+                    <input type="file" id="photo" name="photo" accept="image/*" class="text-input" onchange="onEditPhotoChange(event)">
+                    <small class="hint-text">Laissez vide pour conserver l'image existante.</small>
                 </div>
             </div>
 
-            <div class="form-grid">
-                <div class="form-field">
-                    <label class="field-label" for="prenom_animal">Prenom</label>
-                    <input type="text" id="prenom_animal" name="prenom_animal" value="<?= esc($animal['PRENOM']) ?>" class="form-control" required>
+            <div class="fields-grid">
+                <div class="field-item">
+                    <label class="input-label" for="prenom_animal">Nom / Prenom</label>
+                    <input type="text" id="prenom_animal" name="prenom_animal" value="<?= esc($animal['PRENOM']) ?>" class="text-input" required>
                 </div>
 
-                <div class="form-field">
-                    <label class="field-label" for="age">Age (annees)</label>
-                    <input type="number" id="age" name="age" min="0" max="40" value="<?= esc($animal['AGE']) ?>" class="form-control" required>
+                <div class="field-item">
+                    <label class="input-label" for="age">Age (annees)</label>
+                    <input type="number" id="age" name="age" min="0" max="40" value="<?= esc($animal['AGE']) ?>" class="text-input" required>
                 </div>
 
-                <div class="form-field">
-                    <label class="field-label" for="sexe">Sexe</label>
-                    <select id="sexe" name="sexe" class="form-control" required>
+                <div class="field-item">
+                    <label class="input-label" for="sexe">Sexe</label>
+                    <select id="sexe" name="sexe" class="select-input" required>
                         <option value="Mâle" <?= esc($animal['SEXE']) === 'Mâle' ? 'selected' : '' ?>>Male</option>
                         <option value="Femelle" <?= esc($animal['SEXE']) === 'Femelle' ? 'selected' : '' ?>>Femelle</option>
                     </select>
                 </div>
 
-                <div class="form-field">
-                    <label class="field-label" for="Statue">Statut</label>
-                    <select id="Statue" name="Statue" class="form-control" required>
+                <div class="field-item">
+                    <label class="input-label" for="Statue">Statut</label>
+                    <select id="Statue" name="Statue" class="select-input" required>
                         <option value="retrouvé" <?= strtoupper(esc($animal['STATUE'])) === 'RETROUVE' ? 'selected' : '' ?>>Retrouve</option>
                         <option value="perdu" <?= strtoupper(esc($animal['STATUE'])) === 'PERDU' ? 'selected' : '' ?>>Perdu</option>
                     </select>
                 </div>
 
-                <div class="form-field full-width">
-                    <label class="field-label" for="descriptif">Descriptif / Particularites</label>
-                    <textarea id="descriptif" name="descriptif" rows="4" class="form-control"><?= esc($animal['DESCRIPTIF']) ?></textarea>
+                <div class="field-item full-col">
+                    <label class="input-label" for="descriptif">Descriptif & particularites</label>
+                    <textarea id="descriptif" name="descriptif" rows="3" class="text-input textarea"><?= esc($animal['DESCRIPTIF']) ?></textarea>
                 </div>
             </div>
 
-            <div class="form-actions">
-                <button type="submit" class="btn btn-primary submit-btn">
-                    Sauvegarder les modifications
-                </button>
-                <a href="<?= base_url('animal/' . $animal['ICAD']) ?>" class="btn btn-secondary">
-                    Annuler
-                </a>
+            <div class="panel-footer">
+                <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+                <a href="<?= base_url('animal/' . $animal['ICAD']) ?>" class="btn btn-secondary">Annuler</a>
             </div>
         </form>
     </div>
 </div>
 
 <script>
-    function previewEditPhoto(event) {
-        const preview = document.getElementById('photo-preview');
-        const noPhoto = document.getElementById('no-photo-badge');
-        const file = event.target.files[0];
-
+    function onEditPhotoChange(e) {
+        const file = e.target.files[0];
         if (!file) return;
-
         const reader = new FileReader();
-        reader.onload = function(e) {
-            preview.src = e.target.result;
+        reader.onload = function(evt) {
+            const preview = document.getElementById('editPreview');
+            const noPhoto = document.getElementById('noPhotoTag');
+            preview.src = evt.target.result;
             preview.style.display = 'block';
-            if (noPhoto) {
-                noPhoto.style.display = 'none';
-            }
+            if (noPhoto) noPhoto.style.display = 'none';
         };
         reader.readAsDataURL(file);
     }

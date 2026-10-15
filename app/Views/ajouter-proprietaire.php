@@ -3,10 +3,10 @@
 <?= $this->section('contenu') ?>
 <link rel="stylesheet" href="<?= base_url('css/ajouter-proprietaire.css?v=' . time()); ?>">
 
-<div class="form-page">
-    <div class="form-header-bar">
+<div class="form-layout">
+    <div class="form-nav">
         <a href="<?= base_url('/') ?>" class="back-link">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <line x1="19" y1="12" x2="5" y2="12"></line>
                 <polyline points="12 19 5 12 12 5"></polyline>
             </svg>
@@ -14,57 +14,53 @@
         </a>
     </div>
 
-    <div class="form-card">
-        <div class="form-title-area">
-            <h1 class="form-title">Ajouter un proprietaire</h1>
-            <p class="form-subtitle">Creation d'une fiche titulaire pour lier des carnivores domestiques.</p>
+    <div class="form-panel">
+        <div class="panel-header">
+            <h1 class="panel-title">Nouveau proprietaire</h1>
+            <p class="panel-desc">Creation d'une fiche titulaire pour l'attribution des carnivores domestiques.</p>
         </div>
 
-        <form action="<?= site_url('/ajouter-proprietaire'); ?>" method="POST" class="modern-form">
+        <form action="<?= site_url('/ajouter-proprietaire'); ?>" method="POST" class="app-form">
             <?= csrf_field() ?>
 
-            <div class="form-grid">
-                <div class="form-field full-width">
-                    <label class="field-label" for="identifiant">
-                        Identifiant du proprietaire
-                        <span class="badge-auto">Genere automatiquement</span>
+            <div class="fields-grid">
+                <div class="field-item full-col">
+                    <label class="input-label" for="identifiant">
+                        Identifiant attribue
+                        <span class="auto-tag">Auto-genere</span>
                     </label>
-                    <input type="text" id="identifiant" name="identifiant" value="<?= esc($nouvelIdentifiant) ?>" class="form-control readonly-control" readonly>
+                    <input type="text" id="identifiant" name="identifiant" value="<?= esc($nouvelIdentifiant) ?>" class="text-input mono readonly" readonly>
                 </div>
 
-                <div class="form-field">
-                    <label class="field-label" for="nom">Nom de famille</label>
-                    <input type="text" id="nom" name="nom" class="form-control" placeholder="Ex: Dupont" required>
+                <div class="field-item">
+                    <label class="input-label" for="nom">Nom</label>
+                    <input type="text" id="nom" name="nom" class="text-input" placeholder="Ex: Martin" required>
                 </div>
 
-                <div class="form-field">
-                    <label class="field-label" for="prenom">Prenom</label>
-                    <input type="text" id="prenom" name="prenom" class="form-control" placeholder="Ex: Jean" required>
+                <div class="field-item">
+                    <label class="input-label" for="prenom">Prenom</label>
+                    <input type="text" id="prenom" name="prenom" class="text-input" placeholder="Ex: Sophie" required>
                 </div>
 
-                <div class="form-field">
-                    <label class="field-label" for="telephone">Numero de telephone</label>
-                    <input type="tel" id="telephone" name="telephone" class="form-control" placeholder="Ex: 06 12 34 56 78" required>
+                <div class="field-item">
+                    <label class="input-label" for="telephone">Telephone</label>
+                    <input type="tel" id="telephone" name="telephone" class="text-input" placeholder="Ex: 06 12 34 56 78" required>
                 </div>
 
-                <div class="form-field">
-                    <label class="field-label" for="email">Adresse email</label>
-                    <input type="email" id="email" name="email" class="form-control" placeholder="Ex: jean.dupont@email.com" required>
+                <div class="field-item">
+                    <label class="input-label" for="email">Email</label>
+                    <input type="email" id="email" name="email" class="text-input" placeholder="Ex: sophie.martin@email.com" required>
                 </div>
 
-                <div class="form-field full-width">
-                    <label class="field-label" for="adresse">Adresse postale complete</label>
-                    <textarea id="adresse" name="adresse" rows="3" class="form-control" placeholder="Numero, rue, code postal, ville..."></textarea>
+                <div class="field-item full-col">
+                    <label class="input-label" for="adresse">Adresse postale</label>
+                    <textarea id="adresse" name="adresse" rows="3" class="text-input textarea" placeholder="Voie, code postal, commune..."></textarea>
                 </div>
             </div>
 
-            <div class="form-actions">
-                <button type="submit" class="btn btn-primary submit-btn">
-                    Enregistrer le proprietaire
-                </button>
-                <a href="<?= base_url('/') ?>" class="btn btn-secondary">
-                    Annuler
-                </a>
+            <div class="panel-footer">
+                <button type="submit" class="btn btn-primary">Creer le proprietaire</button>
+                <a href="<?= base_url('/') ?>" class="btn btn-secondary">Annuler</a>
             </div>
         </form>
     </div>
