@@ -217,8 +217,9 @@
 /* Grille de cartes / Blocs */
 .cards-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 340px));
+    justify-content: center;
+    gap: 18px;
     width: 100%;
 }
 
@@ -229,20 +230,24 @@
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    text-decoration: none;
+    color: inherit;
     box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+    cursor: pointer;
 }
 
 .animal-card:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+    border-color: #cbd5e1;
 }
 
 /* Media de carte */
 .card-media {
     position: relative;
     width: 100%;
-    height: 180px;
+    height: 140px;
     background-color: #f8fafc;
     overflow: hidden;
 }
@@ -264,15 +269,15 @@
 }
 
 .avatar-monogram {
-    width: 54px;
-    height: 54px;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
     background-color: #ffffff;
     color: var(--text-secondary);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.35rem;
+    font-size: 1.25rem;
     font-weight: 800;
     box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
     border: 1px solid rgba(226, 232, 240, 0.8);
@@ -281,13 +286,13 @@
 /* Badges Statuts avec la MEME DA : Fond blanc pur + Pastille coloree */
 .badge-status-pill {
     position: absolute;
-    top: 12px;
-    right: 12px;
+    top: 10px;
+    right: 10px;
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    padding: 4px 11px;
-    font-size: 0.74rem;
+    padding: 4px 10px;
+    font-size: 0.72rem;
     font-weight: 700;
     border-radius: var(--radius-pill);
     background-color: #ffffff;
@@ -321,29 +326,31 @@
 
 /* Corps de carte */
 .card-content {
-    padding: 18px;
+    padding: 14px 16px;
     display: flex;
     flex-direction: column;
-    flex: 0 1 420px;
-    gap: 10px;
+    flex: 1;
+    gap: 8px;
 }
 
 .card-header-row {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+    gap: 8px;
 }
 
 .card-animal-name {
-    font-size: 1.15rem;
+    font-size: 1.1rem;
     font-weight: 800;
     color: var(--text-primary);
     letter-spacing: -0.015em;
     line-height: 1.2;
+    margin: 0;
 }
 
 .card-age-pill {
-    font-size: 0.76rem;
+    font-size: 0.74rem;
     font-weight: 600;
     color: var(--text-secondary);
     background-color: #f1f5f9;
@@ -364,10 +371,11 @@
     background-color: #f8fafc;
     border: 1px solid var(--border);
     border-radius: var(--radius-sm);
-    padding: 3px 8px;
+    padding: 2px 7px;
     cursor: pointer;
     color: var(--text-secondary);
     transition: all 0.12s ease;
+    user-select: none;
 }
 
 .icad-badge-btn:hover {
@@ -378,12 +386,12 @@
 
 .mono-id {
     font-family: var(--font-mono);
-    font-size: 0.76rem;
+    font-size: 0.74rem;
     font-weight: 700;
 }
 
 .card-gender-pill {
-    font-size: 0.74rem;
+    font-size: 0.72rem;
     font-weight: 500;
     color: var(--text-secondary);
     background-color: #f8fafc;
@@ -393,28 +401,34 @@
 }
 
 .card-desc-txt {
-    font-size: 0.82rem;
+    font-size: 0.8rem;
     color: var(--text-secondary);
-    line-height: 1.45;
-    margin-top: 2px;
+    line-height: 1.4;
+    margin: 2px 0 0 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .card-footer-box {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-start;
+    justify-content: flex-start;
     margin-top: auto;
-    padding-top: 14px;
+    padding-top: 10px;
     border-top: 1px solid var(--border-subtle);
 }
 
 .owner-meta-block {
     display: flex;
     flex-direction: column;
+    text-align: left;
+    gap: 2px;
 }
 
 .owner-tiny-lbl {
-    font-size: 0.66rem;
+    font-size: 0.64rem;
     font-weight: 700;
     text-transform: uppercase;
     color: var(--text-tertiary);
@@ -422,36 +436,16 @@
 }
 
 .owner-main-name {
-    font-size: 0.84rem;
+    font-size: 0.82rem;
     font-weight: 700;
     color: var(--text-primary);
 }
 
 .owner-tel-link {
     font-size: 0.72rem;
-    color: var(--text-tertiary);
+    color: var(--text-secondary);
     font-family: var(--font-mono);
-    margin-top: 1px;
-    text-align: center;
-}
-
-.btn-consult-action {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    padding: 6px 14px;
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--primary);
-    background-color: var(--primary-subtle);
-    border-radius: var(--radius-sm);
-    text-decoration: none;
-    transition: all 0.15s ease;
-}
-
-.btn-consult-action:hover {
-    background-color: var(--primary);
-    color: #ffffff;
+    text-align: left;
 }
 
 /* Etat aucun resultat */

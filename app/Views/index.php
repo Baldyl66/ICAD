@@ -119,11 +119,12 @@ foreach ($animauxList as $item) {
                              ($animal['nom_proprietaire'] ?? ''));
                 $initiale = strtoupper(substr(esc($animal['PRENOM'] ?? 'A'), 0, 1));
                 ?>
-                <div class="animal-card <?= $isPerdu ? 'card-lost' : '' ?>"
-                     data-name="<?= esc(strtolower($animal['PRENOM'] ?? '')) ?>"
-                     data-icad="<?= esc(strtolower($animal['ICAD'] ?? '')) ?>"
-                     data-prop="<?= esc(strtolower($prop)) ?>"
-                     data-status="<?= $statusSlug ?>">
+                <a href="<?= base_url('animal/' . $animal['ICAD']); ?>"
+                   class="animal-card <?= $isPerdu ? 'card-lost' : '' ?>"
+                   data-name="<?= esc(strtolower($animal['PRENOM'] ?? '')) ?>"
+                   data-icad="<?= esc(strtolower($animal['ICAD'] ?? '')) ?>"
+                   data-prop="<?= esc(strtolower($prop)) ?>"
+                   data-status="<?= $statusSlug ?>">
                     
                     <!-- Media de la carte -->
                     <div class="card-media">
@@ -158,22 +159,24 @@ foreach ($animauxList as $item) {
                         </div>
 
                         <div class="card-badges-row">
-                            <button type="button" class="icad-badge-btn"
-                                    data-copy="<?= esc($animal['ICAD']) ?>"
-                                    title="Cliquer pour copier l'identifiant">
+                            <span class="icad-badge-btn"
+                                  role="button"
+                                  tabindex="0"
+                                  data-copy="<?= esc($animal['ICAD']) ?>"
+                                  title="Cliquer pour copier l'identifiant">
                                 <span class="mono-id">#<?= esc($animal['ICAD']) ?></span>
                                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none"
                                      stroke="currentColor" stroke-width="2">
                                     <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                                     <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
                                 </svg>
-                            </button>
+                            </span>
                             <span class="card-gender-pill"><?= esc($animal['SEXE']) ?></span>
                         </div>
 
                         <?php if (!empty($animal['DESCRIPTIF'])): ?>
                             <p class="card-desc-txt">
-                                <?= esc(mb_strimwidth($animal['DESCRIPTIF'], 0, 78, '...')) ?>
+                                <?= esc(mb_strimwidth($animal['DESCRIPTIF'], 0, 85, '...')) ?>
                             </p>
                         <?php endif; ?>
 
@@ -185,16 +188,9 @@ foreach ($animauxList as $item) {
                                     <span class="owner-tel-link"><?= esc($animal['TELEPHONE']) ?></span>
                                 <?php endif; ?>
                             </div>
-                            <a href="<?= base_url('animal/' . $animal['ICAD']); ?>" class="btn-consult-action">
-                                <span>Fiche</span>
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
-                                     stroke="currentColor" stroke-width="2.2">
-                                    <polyline points="9 18 15 12 9 6"></polyline>
-                                </svg>
-                            </a>
                         </div>
                     </div>
-                </div>
+                </a>
             <?php endforeach; ?>
         <?php endif; ?>
 
@@ -264,7 +260,9 @@ foreach ($animauxList as $item) {
         });
 
         document.querySelectorAll('.icad-badge-btn').forEach(function(btn) {
-            btn.addEventListener('click', function() {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
                 const num = this.getAttribute('data-copy');
                 if (!navigator.clipboard) return;
                 navigator.clipboard.writeText(num).then(function() {
