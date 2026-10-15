@@ -113,8 +113,3 @@ icad/
 └── composer.json          # Dependances du projet
 ```
 
----
-
-## Auteur
-
-Projet scolaire developpe par Dylan Balmigere (2023) - Refonte graphique et organisationnelle (2026).
