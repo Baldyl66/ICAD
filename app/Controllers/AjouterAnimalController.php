@@ -35,7 +35,7 @@ class AjouterAnimalController extends BaseController
         $prenomAnimal = $this->request->getPost('prenom_animal');
         $age = $this->request->getPost('age');
         $icad = $this->request->getPost('icad');
-        $sexe = $this->request->getPost('sexe');
+        $sexe = $this->request->getPost('sexe'); // Directement récupérer la valeur 'Mâle' ou 'Femelle'
         $descriptif = $this->request->getPost('descriptif');
         $statue = $this->request->getPost('Statue');
         $photo = $this->request->getFile('photo'); // Récupérer le fichier photo
@@ -67,7 +67,7 @@ class AjouterAnimalController extends BaseController
             'ICAD' => $icad,
             'PRENOM' => $prenomAnimal,
             'AGE' => $age,
-            'SEXE' => $sexe,
+            'SEXE' => $sexe, // Enregistre 'Mâle' ou 'Femelle'
             'DESCRIPTIF' => $descriptif,
             'PHOTO' => $photoPath,
             'STATUE' => $statue,

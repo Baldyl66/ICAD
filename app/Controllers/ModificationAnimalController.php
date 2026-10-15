@@ -44,7 +44,8 @@ class ModificationAnimalController extends Controller
             'PRENOM' => $this->request->getPost('prenom'),
             'AGE' => $this->request->getPost('age'),
             'SEXE' => $this->request->getPost('sexe'),
-            'DESCRIPTIF' => $this->request->getPost('descriptif')
+            'DESCRIPTIF' => $this->request->getPost('descriptif'),
+            'STATUE' => $this->request->getPost('Statue')
         ];
 
         $model->update($icad, $data);
@@ -63,6 +64,7 @@ class ModificationAnimalController extends Controller
             'AGE' => $this->request->getPost('age'),
             'SEXE' => $this->request->getPost('sexe'),
             'DESCRIPTIF' => $this->request->getPost('descriptif'),
+            'STATUE' => $this->request->getPost('Statue')
         ];
 
         // Si une photo est téléchargée, on la traite
@@ -80,4 +82,3 @@ class ModificationAnimalController extends Controller
         return redirect()->to('/')->with('success', 'Animal modifié avec succès');
     }
 }
-
