@@ -76,11 +76,12 @@ $propAdresse = trim($animal['adresse_proprietaire'] ?? $animal['ADRESSE'] ?? '')
                     </button>
                 </div>
 
-                <h1 class="profile-animal-name"><?= esc($animal['PRENOM']) ?></h1>
-
-                <div class="profile-pills-row">
-                    <span class="card-gender-pill <?= $genderClass ?>"><?= esc($animal['SEXE']) ?></span>
-                    <span class="card-age-pill"><?= esc($animal['AGE']) ?> ans</span>
+                <div class="profile-name-row">
+                    <h1 class="profile-animal-name"><?= esc($animal['PRENOM']) ?></h1>
+                    <div class="profile-pills-row">
+                        <span class="card-gender-pill <?= $genderClass ?>"><?= esc($animal['SEXE']) ?></span>
+                        <span class="card-age-pill"><?= esc($animal['AGE']) ?> ans</span>
+                    </div>
                 </div>
             </div>
 
@@ -96,11 +97,13 @@ $propAdresse = trim($animal['adresse_proprietaire'] ?? $animal['ADRESSE'] ?? '')
                 </a>
                 <form action="<?= base_url('AnimauxController/delete/' . $animal['ICAD']) ?>"
                       method="post" onsubmit="return confirm('Confirmer la suppression definitive de cette fiche ?')">
-                    <button type="submit" class="btn btn-del-action" title="Supprimer la fiche">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    <button type="submit" class="btn-del-action" title="Supprimer la fiche">
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none"
                              stroke="currentColor" stroke-width="2">
                             <polyline points="3 6 5 6 21 6"></polyline>
                             <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path>
+                            <line x1="10" y1="11" x2="10" y2="17"></line>
+                            <line x1="14" y1="11" x2="14" y2="17"></line>
                         </svg>
                     </button>
                 </form>
