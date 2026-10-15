@@ -62,7 +62,7 @@ Renseigner les parametres de connexion dans `.env` :
 ```ini
 CI_ENVIRONMENT = development
 
-app.baseURL = 'http://localhost/icad.local/icad/public/'
+app.baseURL = 'http://localhost/icad.local/public/'
 
 database.default.hostname = localhost
 database.default.database = icad
@@ -85,8 +85,8 @@ Configurer un VirtualHost pointant vers le dossier `public/` :
 ```apache
 <VirtualHost *:80>
     ServerName icad.local
-    DocumentRoot "c:/wamp64/www/icad.local/icad/public"
-    <Directory "c:/wamp64/www/icad.local/icad/public">
+    DocumentRoot "c:/wamp64/www/icad.local/public"
+    <Directory "c:/wamp64/www/icad.local/public">
         AllowOverride All
         Require all granted
     </Directory>
@@ -98,7 +98,7 @@ Configurer un VirtualHost pointant vers le dossier `public/` :
 ## Structure du projet
 
 ```text
-icad/
+icad.local/
 ├── app/
 │   ├── Controllers/       # Controleurs HTTP (AnimauxController, etc.)
 │   ├── Models/            # Modeles d'acces aux donnees
